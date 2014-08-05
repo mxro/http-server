@@ -54,7 +54,7 @@ public final class RequestTimeEnforcementThread extends Thread {
 		while (!isShutdown.get()) {
 			long now = System.currentTimeMillis();
 			for (RequestTimeEntry e : requests) {
-				System.out.println("test "+(now-e.getStarted())+" "+maxTime);
+
 				if (now - e.getStarted() > maxTime) {
 					requests.remove(e);
 
