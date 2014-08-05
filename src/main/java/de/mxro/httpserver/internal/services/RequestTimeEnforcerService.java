@@ -6,6 +6,7 @@ import de.mxro.httpserver.HttpService;
 import de.mxro.httpserver.Request;
 import de.mxro.httpserver.Response;
 import de.mxro.service.callbacks.ShutdownCallback;
+import de.mxro.service.callbacks.StartCallback;
 
 public class RequestTimeEnforcerService implements HttpService {
 
@@ -62,9 +63,18 @@ public class RequestTimeEnforcerService implements HttpService {
 
 		this.decorated = decorated;
 		this.thread = new RequestTimeEnforcementThread(maxTime);
+	}
+
+	@Override
+	public void start(StartCallback callback) {
+		
 		this.thread.setName("requesttimeoutwatcher-" + decorated.getClass());
 		this.thread.setPriority(Thread.MIN_PRIORITY);
 		this.thread.start();
+		this.decorated.start(callback);
 	}
 
+	
+	
+	
 }
