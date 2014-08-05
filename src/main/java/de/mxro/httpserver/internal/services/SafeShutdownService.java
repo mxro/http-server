@@ -1,21 +1,28 @@
 package de.mxro.httpserver.internal.services;
 
+import io.nextweb.fn.Closure;
+import io.nextweb.fn.SuccessFail;
+
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import io.nextweb.fn.Closure;
-import io.nextweb.fn.SuccessFail;
+import de.mxro.httpserver.HttpService;
 import de.mxro.httpserver.Request;
 import de.mxro.httpserver.Response;
-import de.mxro.httpserver.HttpService;
-import de.mxro.httpserver.StoppableHttpService;
+import de.mxro.service.callbacks.ShutdownCallback;
 
-public class SafeShutdownService implements StoppableHttpService {
+/**
+ * Assures that decorated service is only shut down if there are no active requests.
+ * @author Max
+ *  
+ */
+public class SafeShutdownService implements HttpService {
 
 	private final HttpService decorated;
 	AtomicBoolean isShutdown;
 	AtomicInteger activeRequests;
 	AtomicInteger shutdownAttempts;
+	
 	@Override
 	public void process(final Request request, final Response response,
 			final Closure<SuccessFail> callback) {
@@ -40,16 +47,11 @@ public class SafeShutdownService implements StoppableHttpService {
 	}
 
 	@Override
-	public void stop(final Closure<SuccessFail> callback) {
+	public void stop(final ShutdownCallback callback) {
 		isShutdown.set(true);
 		
 		if (activeRequests.get() == 0) {
-			if (!(decorated instanceof StoppableHttpService)) {
-				callback.apply(SuccessFail.success());
-				return;
-			}
-			
-			((StoppableHttpService) decorated).stop(callback);
+			decorated.stop(callback);
 			return;
 		}
 		
