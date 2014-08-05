@@ -10,6 +10,7 @@ import de.mxro.httpserver.HttpService;
 import de.mxro.httpserver.Request;
 import de.mxro.httpserver.Response;
 import de.mxro.service.callbacks.ShutdownCallback;
+import de.mxro.service.callbacks.StartCallback;
 
 /**
  * Assures that decorated service is only shut down if there are no active requests.
@@ -79,6 +80,16 @@ public class SafeShutdownService implements HttpService {
 			
 			
 		}.start();
+		
+	}
+
+	@Override
+	public void start(StartCallback callback) {
+		assert this.activeRequests.get() == 0;
+		
+		this.isShutdown.set(false);
+		this.activeRequests.set(0);
+		this.shutdownAttempts.set(0);
 		
 	}
 
