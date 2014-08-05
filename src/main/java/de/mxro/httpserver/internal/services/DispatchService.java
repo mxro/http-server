@@ -22,14 +22,14 @@ public class DispatchService implements HttpService {
 			Closure<SuccessFail> callback) {
 		
 		final String uri = request.getRequestUri();
-		for (Entry<String, StoppableHttpService> e : serviceMap.entrySet()) {
+		for (Entry<String, HttpService> e : serviceMap.entrySet()) {
 			if ( uri.startsWith(e.getKey())) {
 				e.getValue().process(request, response, callback);
 				return;
 			}
 		}
 		
-		for (Entry<String, StoppableHttpService> e : serviceMap.entrySet()) {
+		for (Entry<String, HttpService> e : serviceMap.entrySet()) {
 			if (e.getKey().equals("*")) {
 				e.getValue().process(request, response, callback);
 			}
@@ -39,18 +39,18 @@ public class DispatchService implements HttpService {
 
 	@Override
 	public void stop(ShutdownCallback callback) {
-		ArrayList<StoppableHttpService> services = new ArrayList<StoppableHttpService>();
+		ArrayList<HttpService> services = new ArrayList<HttpService>();
 		
-		for (Entry<String, StoppableHttpService> e : serviceMap.entrySet()) {
+		for (Entry<String, HttpService> e : serviceMap.entrySet()) {
 			services.add(e.getValue());
 		}
 		
 		stop(services, 0, callback);
 	}
 
-	private void stop(final List<StoppableHttpService> services, final int serviceIdx, final Closure<SuccessFail> callback) {
+	private void stop(final List<HttpService> services, final int serviceIdx, final ShutdownCallback callback) {
 		if (serviceIdx >= services.size()) {
-			callback.apply(SuccessFail.success());
+			callback.onShutdownComplete();
 			return;
 		}
 		
