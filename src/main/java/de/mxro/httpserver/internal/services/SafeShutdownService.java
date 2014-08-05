@@ -91,6 +91,7 @@ public class SafeShutdownService implements HttpService {
 		this.activeRequests.set(0);
 		this.shutdownAttempts.set(0);
 		
+		this.decorated.start(callback);
 	}
 
 	public SafeShutdownService(HttpService decorated) {

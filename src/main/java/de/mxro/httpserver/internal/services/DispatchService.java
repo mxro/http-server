@@ -77,6 +77,7 @@ public class DispatchService implements HttpService {
 
 	@Override
 	public void start(StartCallback callback) {
+		
 		ArrayList<HttpService> services = new ArrayList<HttpService>();
 
 		for (Entry<String, HttpService> e : serviceMap.entrySet()) {
@@ -92,6 +93,8 @@ public class DispatchService implements HttpService {
 			callback.onStarted();
 			return;
 		}
+		
+		System.out.println("starting "+services.get(serviceIdx));
 		
 		services.get(serviceIdx).start(new StartCallback() {
 			
