@@ -1,0 +1,15 @@
+/target
+/bin
+MANIFEST.MF
+.classpath
+.project
+.settings
+/META-INF
+gwt-unitCache
+/src/main/webapp/onedblocaljs
+/src/main/webapp/appjangle
+/src/main/webapp/appjangledebug
+/src/main/webapp/appjangleonedb
+/src/main/webapp/local
+/src/main/webapp/onejs
+/src/main/webapp/WEB-INF/deploy
