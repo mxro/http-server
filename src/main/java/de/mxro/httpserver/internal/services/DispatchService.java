@@ -8,13 +8,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import de.mxro.httpserver.HttpService;
 import de.mxro.httpserver.Request;
 import de.mxro.httpserver.Response;
-import de.mxro.httpserver.StoppableHttpService;
+import de.mxro.service.callbacks.ShutdownCallback;
 
-public class DispatchService implements StoppableHttpService {
+public class DispatchService implements HttpService {
 
-	private final Map<String, StoppableHttpService> serviceMap;
+	private final Map<String, HttpService> serviceMap;
 	
 	@Override
 	public void process(Request request, Response response,
@@ -37,7 +38,7 @@ public class DispatchService implements StoppableHttpService {
 	}
 
 	@Override
-	public void stop(Closure<SuccessFail> callback) {
+	public void stop(ShutdownCallback callback) {
 		ArrayList<StoppableHttpService> services = new ArrayList<StoppableHttpService>();
 		
 		for (Entry<String, StoppableHttpService> e : serviceMap.entrySet()) {
