@@ -54,21 +54,21 @@ public class DispatchService implements HttpService {
 			return;
 		}
 		
-		services.get(serviceIdx).stop(new Closure<SuccessFail>() {
-
+		services.get(serviceIdx).stop(new ShutdownCallback() {
+			
 			@Override
-			public void apply(SuccessFail o) {
-				if (o.isFail()) {
-					callback.apply(o);
-					return;
-				}
-				
+			public void onShutdownComplete() {
 				stop(services, serviceIdx+1, callback);
+			}
+			
+			@Override
+			public void onFailure(Throwable t) {
+				callback.onFailure(t);
 			}
 		});
 	}
 	
-	public DispatchService(Map<String, StoppableHttpService> serviceMap) {
+	public DispatchService(Map<String, HttpService> serviceMap) {
 		super();
 		this.serviceMap = serviceMap;
 	}
