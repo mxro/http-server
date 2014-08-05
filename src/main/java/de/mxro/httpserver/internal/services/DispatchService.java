@@ -12,6 +12,7 @@ import de.mxro.httpserver.HttpService;
 import de.mxro.httpserver.Request;
 import de.mxro.httpserver.Response;
 import de.mxro.service.callbacks.ShutdownCallback;
+import de.mxro.service.callbacks.StartCallback;
 
 public class DispatchService implements HttpService {
 
@@ -48,7 +49,7 @@ public class DispatchService implements HttpService {
 		stop(services, 0, callback);
 	}
 
-	private void stop(final List<HttpService> services, final int serviceIdx, final ShutdownCallback callback) {
+	private static void stop(final List<HttpService> services, final int serviceIdx, final ShutdownCallback callback) {
 		if (serviceIdx >= services.size()) {
 			callback.onShutdownComplete();
 			return;
@@ -71,6 +72,11 @@ public class DispatchService implements HttpService {
 	public DispatchService(Map<String, HttpService> serviceMap) {
 		super();
 		this.serviceMap = serviceMap;
+	}
+
+	@Override
+	public void start(StartCallback callback) {
+		
 	}
 
 	
