@@ -30,6 +30,11 @@
 			<version>[0.0.1,)</version>
 		</dependency>
 
+		<dependency>
+			<groupId>de.mxro.service</groupId>
+			<artifactId>service-api</artifactId>
+			<version>[0.0.1,)</version>
+		</dependency>
 
 		<dependency>
 			<groupId>junit</groupId>
