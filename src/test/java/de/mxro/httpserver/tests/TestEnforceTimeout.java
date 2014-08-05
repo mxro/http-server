@@ -23,7 +23,7 @@ public class TestEnforceTimeout {
 		
 		final CountDownLatch latch = new CountDownLatch(1);
 		
-		RequestTimeEnforcerService testService = new RequestTimeEnforcerService(100, new HttpService() {
+		final RequestTimeEnforcerService testService = new RequestTimeEnforcerService(100, new HttpService() {
 			
 			@Override
 			public void process(Request request, Response response,
@@ -43,13 +43,27 @@ public class TestEnforceTimeout {
 			}
 		});
 		
-		testService.process(HttpServer.createDummyRequest(), HttpServer.createResponse(), new Closure<SuccessFail>() {
-
+		testService.start(new StartCallback() {
+			
 			@Override
-			public void apply(SuccessFail o) {
+			public void onStarted() {
+				testService.process(HttpServer.createDummyRequest(), HttpServer.createResponse(), new Closure<SuccessFail>() {
+
+					@Override
+					public void apply(SuccessFail o) {
+						latch.countDown();
+					}
+				});
+			}
+			
+			@Override
+			public void onFailure(Throwable t) {
+				t.printStackTrace();
 				latch.countDown();
 			}
 		});
+		
+		
 		
 		latch.await();
 		
