@@ -67,8 +67,7 @@ public class RequestTimeEnforcerService implements HttpService {
 
 	@Override
 	public void start(StartCallback callback) {
-		new Exception("starting").printStackTrace();
-		this.thread.setName("requesttimeoutwatcher-" + decorated.getClass());
+		this.thread.setName(this.getClass()+"-watching-" + decorated.getClass());
 		this.thread.setPriority(Thread.MIN_PRIORITY);
 		this.thread.start();
 		this.decorated.start(callback);

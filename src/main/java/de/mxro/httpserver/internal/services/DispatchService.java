@@ -94,8 +94,6 @@ public class DispatchService implements HttpService {
 			return;
 		}
 		
-		System.err.println("starting "+services.get(serviceIdx));
-		
 		services.get(serviceIdx).start(new StartCallback() {
 			
 			@Override
