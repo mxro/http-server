@@ -2,10 +2,10 @@ package de.mxro.httpserver.internal.services;
 
 import io.nextweb.fn.Closure;
 import io.nextweb.fn.SuccessFail;
+import de.mxro.httpserver.HttpService;
 import de.mxro.httpserver.Request;
 import de.mxro.httpserver.Response;
-import de.mxro.httpserver.HttpService;
-import de.mxro.httpserver.StoppableHttpService;
+import de.mxro.service.callbacks.ShutdownCallback;
 
 public class RequestTimeEnforcerService implements HttpService {
 
@@ -16,7 +16,8 @@ public class RequestTimeEnforcerService implements HttpService {
 	public void process(final Request request, final Response response,
 			final Closure<SuccessFail> callback) {
 
-		final RequestTimeEntry entry = thread.logRequest(request, response, callback);
+		final RequestTimeEntry entry = thread.logRequest(request, response,
+				callback);
 
 		decorated.process(request, response, new Closure<SuccessFail>() {
 
@@ -37,23 +38,23 @@ public class RequestTimeEnforcerService implements HttpService {
 	}
 
 	@Override
-	public void stop(final Closure<SuccessFail> callback) {
-		if (decorated instanceof StoppableHttpService) {
-			((StoppableHttpService) decorated).stop(new Closure<SuccessFail>() {
+	public void stop(final ShutdownCallback callback) {
 
-				@Override
-				public void apply(SuccessFail o) {
-					thread.shutdown();
-					
-					callback.apply(o);
-				}
-			});
-			return;
-		}
-		
-		this.thread.shutdown();
-		
-		callback.apply(SuccessFail.success());
+		decorated.stop(new ShutdownCallback() {
+
+			@Override
+			public void onShutdownComplete() {
+				thread.shutdown();
+				callback.onShutdownComplete();
+
+			}
+
+			@Override
+			public void onFailure(Throwable t) {
+				callback.onFailure(t);
+			}
+		});
+
 	}
 
 	public RequestTimeEnforcerService(long maxTime, HttpService decorated) {
