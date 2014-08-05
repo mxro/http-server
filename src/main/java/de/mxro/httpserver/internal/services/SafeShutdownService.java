@@ -63,12 +63,12 @@ public class SafeShutdownService implements HttpService {
 				try {
 					Thread.sleep(shutdownAttempts.get());
 				} catch (InterruptedException e) {
-					callback.apply(SuccessFail.fail(e));
+					callback.onFailure(e);
 					return;
 				}
 				
 				if (shutdownAttempts.get() > 50) {
-					callback.apply(SuccessFail.fail(new Exception("Failed to shutdown service: ["+decorated+"]")));
+					callback.onFailure(new Exception("Failed to shutdown service: ["+decorated+"]"));
 					return;
 				}
 				
