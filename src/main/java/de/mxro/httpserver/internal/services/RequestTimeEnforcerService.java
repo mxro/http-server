@@ -7,7 +7,7 @@ import de.mxro.httpserver.Response;
 import de.mxro.httpserver.HttpService;
 import de.mxro.httpserver.StoppableHttpService;
 
-public class RequestTimeEnforcerService implements StoppableHttpService {
+public class RequestTimeEnforcerService implements HttpService {
 
 	private final HttpService decorated;
 	private final RequestTimeEnforcementThread thread;
