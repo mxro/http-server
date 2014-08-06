@@ -1,6 +1,5 @@
 package de.mxro.httpserver.internal.services;
 
-import io.nextweb.fn.Closure;
 import io.nextweb.fn.SuccessFail;
 
 import java.util.ArrayList;
@@ -8,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import de.mxro.fn.Closure;
 import de.mxro.httpserver.HttpService;
 import de.mxro.httpserver.Request;
 import de.mxro.httpserver.Response;

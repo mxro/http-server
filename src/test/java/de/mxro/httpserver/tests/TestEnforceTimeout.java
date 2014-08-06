@@ -2,11 +2,11 @@ package de.mxro.httpserver.tests;
 
 import java.util.concurrent.CountDownLatch;
 
-import io.nextweb.fn.Closure;
 import io.nextweb.fn.SuccessFail;
 
 import org.junit.Test;
 
+import de.mxro.fn.Closure;
 import de.mxro.httpserver.HttpServer;
 import de.mxro.httpserver.Request;
 import de.mxro.httpserver.Response;

@@ -1,7 +1,7 @@
 package de.mxro.httpserver.internal.services;
 
-import io.nextweb.fn.Closure;
 import io.nextweb.fn.SuccessFail;
+import de.mxro.fn.Closure;
 import de.mxro.httpserver.Request;
 import de.mxro.httpserver.Response;
 
