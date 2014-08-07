@@ -33,7 +33,7 @@ public class TestEnforceTimeout {
 
 			@Override
 			public void stop(ShutdownCallback callback) {
-				callback.onShutdownComplete();
+				callback.onSuccess();
 			}
 
 			@Override

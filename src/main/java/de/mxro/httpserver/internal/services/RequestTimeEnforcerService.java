@@ -44,9 +44,9 @@ public class RequestTimeEnforcerService implements HttpService {
 		decorated.stop(new ShutdownCallback() {
 
 			@Override
-			public void onShutdownComplete() {
+			public void onSuccess() {
 				thread.shutdown();
-				callback.onShutdownComplete();
+				callback.onSuccess();
 
 			}
 

@@ -51,14 +51,14 @@ public class DispatchService implements HttpService {
 	private static void stop(final List<HttpService> services,
 			final int serviceIdx, final ShutdownCallback callback) {
 		if (serviceIdx >= services.size()) {
-			callback.onShutdownComplete();
+			callback.onSuccess();
 			return;
 		}
 
 		services.get(serviceIdx).stop(new ShutdownCallback() {
 
 			@Override
-			public void onShutdownComplete() {
+			public void onSuccess() {
 				stop(services, serviceIdx + 1, callback);
 			}
 
