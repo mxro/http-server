@@ -9,7 +9,6 @@
 	</description>
 
 	<properties>
-
 		<module.gwtVersion>2.5.1</module.gwtVersion>
 		<module.draftCompile>true</module.draftCompile>
 		<module.importedPackages>
@@ -22,7 +21,6 @@
 		</module.serviceDefinitions>
 	</properties>
 
-	<!-- Dependent Modules -->
 	<dependencies>
 
 		<dependency>
