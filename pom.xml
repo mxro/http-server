@@ -7,6 +7,7 @@
 	<version>0.0.4</version>
 	<description>An abstract API for building HTTP servers.
 	</description>
+	<url>https://github.com/mxro/http-server</url>
 
 	<properties>
 		<module.gwtVersion>2.5.1</module.gwtVersion>
