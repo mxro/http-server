@@ -12,7 +12,6 @@ import de.mxro.httpserver.HttpService;
 import de.mxro.httpserver.Request;
 import de.mxro.httpserver.Response;
 import de.mxro.service.callbacks.ShutdownCallback;
-import de.mxro.service.callbacks.StartCallback;
 
 public class DispatchService implements HttpService {
 
