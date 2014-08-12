@@ -38,7 +38,7 @@ public class DispatchService implements HttpService {
 	}
 
 	@Override
-	public void stop(ShutdownCallback callback) {
+	public void stop(SimpleCallback callback) {
 		ArrayList<HttpService> services = new ArrayList<HttpService>();
 
 		for (Entry<String, HttpService> e : serviceMap.entrySet()) {
@@ -49,7 +49,7 @@ public class DispatchService implements HttpService {
 	}
 
 	private static void stop(final List<HttpService> services,
-			final int serviceIdx, final ShutdownCallback callback) {
+			final int serviceIdx, final SimpleCallback callback) {
 		if (serviceIdx >= services.size()) {
 			callback.onSuccess();
 			return;
