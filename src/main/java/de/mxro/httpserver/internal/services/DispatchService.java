@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import de.mxro.async.callbacks.SimpleCallback;
 import de.mxro.fn.Closure;
 import de.mxro.fn.SuccessFail;
 import de.mxro.httpserver.HttpService;
@@ -75,7 +76,7 @@ public class DispatchService implements HttpService {
 	}
 
 	@Override
-	public void start(StartCallback callback) {
+	public void start(SimpleCallback callback) {
 		
 		ArrayList<HttpService> services = new ArrayList<HttpService>();
 
@@ -87,16 +88,16 @@ public class DispatchService implements HttpService {
 	}
 
 	private static void start(final List<HttpService> services,
-			final int serviceIdx, final StartCallback callback) {
+			final int serviceIdx, final SimpleCallback callback) {
 		if (serviceIdx >= services.size()) {
-			callback.onStarted();
+			callback.onSuccess();
 			return;
 		}
 		
-		services.get(serviceIdx).start(new StartCallback() {
+		services.get(serviceIdx).start(new SimpleCallback() {
 			
 			@Override
-			public void onStarted() {
+			public void onSuccess() {
 				start(services, serviceIdx+1, callback);
 			}
 			

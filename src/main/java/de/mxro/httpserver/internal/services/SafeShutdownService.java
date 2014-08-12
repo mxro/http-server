@@ -3,13 +3,13 @@ package de.mxro.httpserver.internal.services;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import de.mxro.async.callbacks.SimpleCallback;
 import de.mxro.fn.Closure;
 import de.mxro.fn.SuccessFail;
 import de.mxro.httpserver.HttpService;
 import de.mxro.httpserver.Request;
 import de.mxro.httpserver.Response;
 import de.mxro.service.callbacks.ShutdownCallback;
-import de.mxro.service.callbacks.StartCallback;
 
 /**
  * Assures that decorated service is only shut down if there are no active requests.
@@ -83,7 +83,7 @@ public class SafeShutdownService implements HttpService {
 	}
 
 	@Override
-	public void start(StartCallback callback) {
+	public void start(SimpleCallback callback) {
 		assert this.activeRequests.get() == 0;
 		
 		this.isShutdown.set(false);
