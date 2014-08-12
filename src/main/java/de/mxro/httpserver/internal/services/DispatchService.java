@@ -55,7 +55,7 @@ public class DispatchService implements HttpService {
 			return;
 		}
 
-		services.get(serviceIdx).stop(new ShutdownCallback() {
+		services.get(serviceIdx).stop(new SimpleCallback() {
 
 			@Override
 			public void onSuccess() {

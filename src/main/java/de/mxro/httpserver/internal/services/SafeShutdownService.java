@@ -9,7 +9,6 @@ import de.mxro.fn.SuccessFail;
 import de.mxro.httpserver.HttpService;
 import de.mxro.httpserver.Request;
 import de.mxro.httpserver.Response;
-import de.mxro.service.callbacks.ShutdownCallback;
 
 /**
  * Assures that decorated service is only shut down if there are no active requests.
@@ -47,7 +46,7 @@ public class SafeShutdownService implements HttpService {
 	}
 
 	@Override
-	public void stop(final ShutdownCallback callback) {
+	public void stop(final SimpleCallback callback) {
 		isShutdown.set(true);
 		
 		if (activeRequests.get() == 0) {

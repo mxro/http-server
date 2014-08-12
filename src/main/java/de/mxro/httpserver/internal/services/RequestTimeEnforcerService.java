@@ -39,7 +39,7 @@ public class RequestTimeEnforcerService implements HttpService {
 	}
 
 	@Override
-	public void stop(final ShutdownCallback callback) {
+	public void stop(final SimpleCallback callback) {
 
 		decorated.stop(new ShutdownCallback() {
 

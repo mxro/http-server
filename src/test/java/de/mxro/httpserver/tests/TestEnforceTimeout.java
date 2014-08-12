@@ -12,7 +12,6 @@ import de.mxro.httpserver.HttpService;
 import de.mxro.httpserver.Request;
 import de.mxro.httpserver.Response;
 import de.mxro.httpserver.internal.services.RequestTimeEnforcerService;
-import de.mxro.service.callbacks.ShutdownCallback;
 
 public class TestEnforceTimeout {
 
@@ -32,7 +31,7 @@ public class TestEnforceTimeout {
 			}
 
 			@Override
-			public void stop(ShutdownCallback callback) {
+			public void stop(SimpleCallback callback) {
 				callback.onSuccess();
 			}
 
