@@ -43,7 +43,7 @@ public class TestEnforceTimeout {
 			}
 		});
 		
-		testService.start(new StartCallback() {
+		testService.start(new SimpleCallback() {
 			
 			@Override
 			public void onSuccess() {
