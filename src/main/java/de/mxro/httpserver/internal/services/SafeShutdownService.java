@@ -7,7 +7,7 @@ import de.mxro.httpserver.HttpService;
 import de.mxro.httpserver.Request;
 import de.mxro.httpserver.Response;
 import de.mxro.service.jre.ServiceJre;
-import de.mxro.service.utils.ActivityMonitor;
+import de.mxro.service.utils.OperationCounter;
 import de.mxro.service.utils.ShutdownHelper;
 
 /**
@@ -21,7 +21,7 @@ public class SafeShutdownService implements HttpService {
 	private final HttpService decorated;
 	
 	ShutdownHelper shutdownHelper;
-	ActivityMonitor activityMonitor;
+	OperationCounter activityMonitor;
 	
 	@Override
 	public void process(final Request request, final Response response,
@@ -34,13 +34,13 @@ public class SafeShutdownService implements HttpService {
 			return;
 		}
 
-		activityMonitor.notifyOperationStarted();
+		activityMonitor.increase();
 		
 		decorated.process(request, response, new Closure<SuccessFail>() {
 
 			@Override
 			public void apply(SuccessFail o) {
-				activityMonitor.notifyOperationCompleted();
+				activityMonitor.decrease();
 				callback.apply(o);
 			}
 		});
@@ -55,7 +55,7 @@ public class SafeShutdownService implements HttpService {
 
 	@Override
 	public void start(SimpleCallback callback) {
-		this.activityMonitor = ServiceJre.createActivityMonitor();
+		this.activityMonitor = ServiceJre.createOperationCounter();
 		this.shutdownHelper = ServiceJre.createShutdownHelper(activityMonitor);
 
 		this.decorated.start(callback);
