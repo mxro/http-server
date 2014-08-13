@@ -11,6 +11,7 @@ import de.mxro.httpserver.Request;
 import de.mxro.httpserver.Response;
 import de.mxro.service.jre.ServiceJre;
 import de.mxro.service.utils.ActivityMonitor;
+import de.mxro.service.utils.ShutdownHelper;
 
 /**
  * <P>Assures that decorated service is only shut down if there are no active requests.
@@ -21,9 +22,9 @@ import de.mxro.service.utils.ActivityMonitor;
 public class SafeShutdownService implements HttpService {
 
 	private final HttpService decorated;
-	AtomicBoolean isShutdown;
+	
+	ShutdownHelper shutdownHelper;
 	ActivityMonitor activityMonitor;
-	AtomicInteger shutdownAttempts;
 	
 	@Override
 	public void process(final Request request, final Response response,
