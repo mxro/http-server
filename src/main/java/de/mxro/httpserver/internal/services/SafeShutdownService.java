@@ -12,6 +12,7 @@ import de.mxro.httpserver.Response;
 
 /**
  * <P>Assures that decorated service is only shut down if there are no active requests.
+ * 
  * @author Max
  *  
  */
