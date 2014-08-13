@@ -49,8 +49,8 @@ public class SafeShutdownService implements HttpService {
 	@Override
 	public void stop(final SimpleCallback callback) {
 		this.shutdownHelper.shutdown(callback);
-		this.operationCounter = null;
-		this.shutdownHelper = null;
+		// this.operationCounter = null;
+		// this.shutdownHelper = null;
 	}
 
 	@Override
