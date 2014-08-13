@@ -11,7 +11,6 @@ import de.mxro.fn.SuccessFail;
 import de.mxro.httpserver.HttpService;
 import de.mxro.httpserver.Request;
 import de.mxro.httpserver.Response;
-import de.mxro.service.callbacks.ShutdownCallback;
 
 public class DispatchService implements HttpService {
 
