@@ -64,8 +64,8 @@ public class SafeShutdownService implements HttpService {
 	public SafeShutdownService(HttpService decorated) {
 		super();
 		this.decorated = decorated;
-		this.operationCounter = null;
-		this.shutdownHelper = null;
+		this.operationCounter = ServiceJre.createOperationCounter();
+		this.shutdownHelper = ServiceJre.createShutdownHelper(operationCounter);
 	}
 
 	
