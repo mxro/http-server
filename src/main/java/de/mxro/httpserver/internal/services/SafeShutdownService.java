@@ -29,7 +29,7 @@ public class SafeShutdownService implements HttpService {
 	@Override
 	public void process(final Request request, final Response response,
 			final Closure<SuccessFail> callback) {
-		if (isShutdown.get()) {
+		if (this.shutdownHelper.isShuttingDown()) {
 			response.setResponseCode(503);
 			response.setContent("Service "+this.getClass().getName()+" is in shutdown procedure.");
 			response.setMimeType("text/plain");
@@ -51,56 +51,24 @@ public class SafeShutdownService implements HttpService {
 
 	@Override
 	public void stop(final SimpleCallback callback) {
-		isShutdown.set(true);
-		
-		if (activityMonitor.pendingOperations() == 0) {
-			decorated.stop(callback);
-			return;
-		}
-		
-		new Thread() {
-
-			@Override
-			public void run() {
-				shutdownAttempts.incrementAndGet();
-				try {
-					Thread.sleep(shutdownAttempts.get());
-				} catch (InterruptedException e) {
-					callback.onFailure(e);
-					return;
-				}
-				
-				if (shutdownAttempts.get() > 50) {
-					callback.onFailure(new Exception("Failed to shutdown service: ["+decorated+"]"));
-					return;
-				}
-				
-				SafeShutdownService.this.stop(callback);
-				
-			}
-			
-			
-			
-		}.start();
-		
+		this.shutdownHelper.shutdown(callback);
 	}
 
 	@Override
 	public void start(SimpleCallback callback) {
 		assert this.activityMonitor.pendingOperations() == 0;
 		
-		this.isShutdown.set(false);
-		this.shutdownAttempts.set(0);
-		
+		this.activityMonitor = ServiceJre.createActivityMonitor();
+		this.shutdownHelper = ServiceJre.createShutdownHelper(activityMonitor);
+
 		this.decorated.start(callback);
 	}
 
 	public SafeShutdownService(HttpService decorated) {
 		super();
 		this.decorated = decorated;
-		this.isShutdown = new AtomicBoolean(false);
-		this.activityMonitor = ServiceJre.createActivityMonitor();
-		this.shutdownAttempts = new AtomicInteger(0);
+		this.activityMonitor = null;
+		this.shutdownHelper = null;
 	}
 
 	
