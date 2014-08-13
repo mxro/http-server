@@ -1,8 +1,5 @@
 package de.mxro.httpserver.internal.services;
 
-import java.util.concurrent.atomic.AtomicBoolean;
-import java.util.concurrent.atomic.AtomicInteger;
-
 import de.mxro.async.callbacks.SimpleCallback;
 import de.mxro.fn.Closure;
 import de.mxro.fn.SuccessFail;
@@ -52,12 +49,12 @@ public class SafeShutdownService implements HttpService {
 	@Override
 	public void stop(final SimpleCallback callback) {
 		this.shutdownHelper.shutdown(callback);
+		this.activityMonitor = null;
+		this.shutdownHelper = null;
 	}
 
 	@Override
 	public void start(SimpleCallback callback) {
-		assert this.activityMonitor.pendingOperations() == 0;
-		
 		this.activityMonitor = ServiceJre.createActivityMonitor();
 		this.shutdownHelper = ServiceJre.createShutdownHelper(activityMonitor);
 
