@@ -21,7 +21,7 @@ public class SafeShutdownService implements HttpService {
 	private final HttpService decorated;
 	
 	ShutdownHelper shutdownHelper;
-	OperationCounter activityMonitor;
+	OperationCounter operationCounter;
 	
 	@Override
 	public void process(final Request request, final Response response,
@@ -34,13 +34,13 @@ public class SafeShutdownService implements HttpService {
 			return;
 		}
 
-		activityMonitor.increase();
+		operationCounter.increase();
 		
 		decorated.process(request, response, new Closure<SuccessFail>() {
 
 			@Override
 			public void apply(SuccessFail o) {
-				activityMonitor.decrease();
+				operationCounter.decrease();
 				callback.apply(o);
 			}
 		});
@@ -49,14 +49,14 @@ public class SafeShutdownService implements HttpService {
 	@Override
 	public void stop(final SimpleCallback callback) {
 		this.shutdownHelper.shutdown(callback);
-		this.activityMonitor = null;
+		this.operationCounter = null;
 		this.shutdownHelper = null;
 	}
 
 	@Override
 	public void start(SimpleCallback callback) {
-		this.activityMonitor = ServiceJre.createOperationCounter();
-		this.shutdownHelper = ServiceJre.createShutdownHelper(activityMonitor);
+		this.operationCounter = ServiceJre.createOperationCounter();
+		this.shutdownHelper = ServiceJre.createShutdownHelper(operationCounter);
 
 		this.decorated.start(callback);
 	}
@@ -64,7 +64,7 @@ public class SafeShutdownService implements HttpService {
 	public SafeShutdownService(HttpService decorated) {
 		super();
 		this.decorated = decorated;
-		this.activityMonitor = null;
+		this.operationCounter = null;
 		this.shutdownHelper = null;
 	}
 
