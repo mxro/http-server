@@ -9,6 +9,7 @@ import de.mxro.fn.SuccessFail;
 import de.mxro.httpserver.HttpService;
 import de.mxro.httpserver.Request;
 import de.mxro.httpserver.Response;
+import de.mxro.service.ServiceActivityMonitor;
 
 /**
  * <P>Assures that decorated service is only shut down if there are no active requests.
@@ -20,15 +21,13 @@ public class SafeShutdownService implements HttpService {
 
 	private final HttpService decorated;
 	AtomicBoolean isShutdown;
-	AtomicInteger activeRequests;
+	ServiceActivityMonitor activityMonitor;
 	AtomicInteger shutdownAttempts;
 	
 	@Override
 	public void process(final Request request, final Response response,
 			final Closure<SuccessFail> callback) {
-		activeRequests.incrementAndGet();
 		if (isShutdown.get()) {
-			activeRequests.decrementAndGet();
 			response.setResponseCode(503);
 			response.setContent("Service "+this.getClass().getName()+" is in shutdown procedure.");
 			response.setMimeType("text/plain");
@@ -36,11 +35,13 @@ public class SafeShutdownService implements HttpService {
 			return;
 		}
 
+		activityMonitor.notifyOperationStarted();
+		
 		decorated.process(request, response, new Closure<SuccessFail>() {
 
 			@Override
 			public void apply(SuccessFail o) {
-				activeRequests.decrementAndGet();
+				activityMonitor.notifyOperationCompleted();
 				callback.apply(o);
 			}
 		});
@@ -50,7 +51,7 @@ public class SafeShutdownService implements HttpService {
 	public void stop(final SimpleCallback callback) {
 		isShutdown.set(true);
 		
-		if (activeRequests.get() == 0) {
+		if (activityMonitor.pendingOperations() == 0) {
 			decorated.stop(callback);
 			return;
 		}
