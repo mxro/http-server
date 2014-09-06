@@ -11,64 +11,64 @@ import de.mxro.service.utils.OperationCounter;
 import de.mxro.service.utils.ShutdownHelper;
 
 /**
- * <P>Assures that decorated service is only shut down if there are no active requests.
+ * <P>
+ * Assures that decorated service is only shut down if there are no active
+ * requests.
  * 
  * @author Max
- *  
+ * 
  */
 public class SafeShutdownService implements HttpService {
 
-	private final HttpService decorated;
-	
-	ShutdownHelper shutdownHelper;
-	OperationCounter operationCounter;
-	
-	@Override
-	public void process(final Request request, final Response response,
-			final Closure<SuccessFail> callback) {
-		if (this.shutdownHelper.isShuttingDown()) {
-			response.setResponseCode(503);
-			response.setContent("Service "+this.getClass().getName()+" is in shutdown procedure.");
-			response.setMimeType("text/plain");
-			callback.apply(SuccessFail.success());
-			return;
-		}
+    private final HttpService decorated;
 
-		operationCounter.increase();
-		
-		decorated.process(request, response, new Closure<SuccessFail>() {
+    ShutdownHelper shutdownHelper;
+    OperationCounter operationCounter;
 
-			@Override
-			public void apply(SuccessFail o) {
-				operationCounter.decrease();
-				callback.apply(o);
-			}
-		});
-	}
+    @Override
+    public void process(final Request request, final Response response, final Closure<SuccessFail> callback) {
+        if (this.shutdownHelper.isShuttingDown()) {
+            response.setResponseCode(503);
+            response.setContent("Service " + this.getClass().getName() + " is in shutdown procedure.");
+            response.setMimeType("text/plain");
+            callback.apply(SuccessFail.success());
+            return;
+        }
 
-	@Override
-	public void stop(final SimpleCallback callback) {
-		this.shutdownHelper.shutdown(callback);
-		// this.operationCounter = null;
-		// this.shutdownHelper = null;
-	}
+        operationCounter.increase();
 
-	@Override
-	public void start(SimpleCallback callback) {
-		this.operationCounter = ServiceJre.createOperationCounter();
-		this.shutdownHelper = ServiceJre.createShutdownHelper(operationCounter);
+        decorated.process(request, response, new Closure<SuccessFail>() {
 
-		this.decorated.start(callback);
-	}
+            @Override
+            public void apply(final SuccessFail o) {
+                operationCounter.decrease();
+                callback.apply(o);
+            }
+        });
+    }
 
-	public SafeShutdownService(HttpService decorated) {
-		super();
-		this.decorated = decorated;
-		this.operationCounter = ServiceJre.createOperationCounter();
-		this.shutdownHelper = ServiceJre.createShutdownHelper(operationCounter);
-	}
+    @Override
+    public void stop(final SimpleCallback callback) {
 
-	
-	
-	
+        System.out.println("HERE " + decorated);
+        this.shutdownHelper.shutdown(callback);
+        // this.operationCounter = null;
+        // this.shutdownHelper = null;
+    }
+
+    @Override
+    public void start(final SimpleCallback callback) {
+        this.operationCounter = ServiceJre.createOperationCounter();
+        this.shutdownHelper = ServiceJre.createShutdownHelper(operationCounter);
+
+        this.decorated.start(callback);
+    }
+
+    public SafeShutdownService(final HttpService decorated) {
+        super();
+        this.decorated = decorated;
+        this.operationCounter = ServiceJre.createOperationCounter();
+        this.shutdownHelper = ServiceJre.createShutdownHelper(operationCounter);
+    }
+
 }
