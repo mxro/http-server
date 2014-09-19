@@ -6,7 +6,7 @@ import de.mxro.fn.SuccessFail;
 import de.mxro.httpserver.HttpService;
 import de.mxro.httpserver.Request;
 import de.mxro.httpserver.Response;
-import de.mxro.service.jre.ServiceJre;
+import de.mxro.service.jre.ServicesJre;
 import de.mxro.service.utils.OperationCounter;
 import de.mxro.service.utils.ShutdownHelper;
 
@@ -58,8 +58,8 @@ public class SafeShutdownService implements HttpService {
 
     @Override
     public void start(final SimpleCallback callback) {
-        this.operationCounter = ServiceJre.createOperationCounter();
-        this.shutdownHelper = ServiceJre.createShutdownHelper(operationCounter);
+        this.operationCounter = ServicesJre.createOperationCounter();
+        this.shutdownHelper = ServicesJre.createShutdownHelper(operationCounter);
 
         this.decorated.start(callback);
     }
@@ -67,8 +67,8 @@ public class SafeShutdownService implements HttpService {
     public SafeShutdownService(final HttpService decorated) {
         super();
         this.decorated = decorated;
-        this.operationCounter = ServiceJre.createOperationCounter();
-        this.shutdownHelper = ServiceJre.createShutdownHelper(operationCounter);
+        this.operationCounter = ServicesJre.createOperationCounter();
+        this.shutdownHelper = ServicesJre.createShutdownHelper(operationCounter);
     }
 
 }
