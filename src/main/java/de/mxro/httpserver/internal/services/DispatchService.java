@@ -12,13 +12,13 @@ import de.mxro.httpserver.HttpService;
 import de.mxro.httpserver.Request;
 import de.mxro.httpserver.Response;
 
-public class DispatchService implements HttpService {
+public final class DispatchService implements HttpService {
 
     private final Map<String, HttpService> serviceMap;
 
     @Override
-    public void process(final Request request, final Response response, final Closure<SuccessFail> callback) {
-
+    public final void process(final Request request, final Response response, final Closure<SuccessFail> callback) {
+        // TODO use more efficient data structure
         final String uri = request.getRequestUri();
         for (final Entry<String, HttpService> e : serviceMap.entrySet()) {
             if (uri.startsWith(e.getKey())) {
