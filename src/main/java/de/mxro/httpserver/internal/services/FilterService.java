@@ -8,7 +8,7 @@ import de.mxro.httpserver.HttpService;
 import de.mxro.httpserver.Request;
 import de.mxro.httpserver.Response;
 
-public class FilterService implements HttpService {
+public final class FilterService implements HttpService {
 
     private final Function<Request, Boolean> test;
     private final HttpService primary;
@@ -48,7 +48,7 @@ public class FilterService implements HttpService {
     }
 
     @Override
-    public void process(final Request request, final Response response, final Closure<SuccessFail> callback) {
+    public final void process(final Request request, final Response response, final Closure<SuccessFail> callback) {
 
         if (test.apply(request)) {
             this.primary.process(request, response, callback);
