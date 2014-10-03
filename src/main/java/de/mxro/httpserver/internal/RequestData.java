@@ -12,6 +12,8 @@ public final class RequestData implements Request {
     private InputStream inputStream;
     private byte[] data;
     private Map<String, String> headers;
+    private String requestUri;
+    private HttpMethod method;
 
     @Override
     public InputStream getInputStream() {
@@ -30,26 +32,23 @@ public final class RequestData implements Request {
 
     @Override
     public String getRequestUri() {
-        // TODO Auto-generated method stub
-        return null;
+        return requestUri;
     }
 
     @Override
     public String getHeader(final String key) {
-        // TODO Auto-generated method stub
-        return null;
+        return headers.get(key);
     }
 
     @Override
     public HttpMethod getMethod() {
-        // TODO Auto-generated method stub
-        return null;
+        return method;
     }
 
     @Override
     public Address getSourceAddress() {
-        // TODO Auto-generated method stub
-        return null;
+        return address;
+
     }
 
 }
