@@ -9,21 +9,23 @@ import de.mxro.httpserver.Request;
 
 public final class RequestData implements Request {
 
+    private InputStream inputStream;
+    private byte[] data;
+    private Map<String, String> headers;
+
     @Override
     public InputStream getInputStream() {
-        return null;
+        return inputStream;
     }
 
     @Override
     public byte[] getData() {
-        // TODO Auto-generated method stub
-        return null;
+        return data;
     }
 
     @Override
     public Map<String, String> getHeaders() {
-        // TODO Auto-generated method stub
-        return null;
+        return headers;
     }
 
     @Override
