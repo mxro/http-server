@@ -9,12 +9,12 @@ import de.mxro.httpserver.Request;
 
 public final class RequestData implements Request {
 
-    private final InputStream inputStream;
-    private final byte[] data;
-    private final Map<String, String> headers;
-    private final String requestUri;
-    private final HttpMethod method;
-    private final Address address;
+    private InputStream inputStream;
+    private byte[] data;
+    private Map<String, String> headers;
+    private String requestUri;
+    private HttpMethod method;
+    private Address address;
 
     @Override
     public InputStream getInputStream() {
@@ -49,6 +49,30 @@ public final class RequestData implements Request {
     @Override
     public Address getSourceAddress() {
         return address;
+    }
+
+    public void setInputStream(final InputStream inputStream) {
+        this.inputStream = inputStream;
+    }
+
+    public void setData(final byte[] data) {
+        this.data = data;
+    }
+
+    public void setHeaders(final Map<String, String> headers) {
+        this.headers = headers;
+    }
+
+    public void setRequestUri(final String requestUri) {
+        this.requestUri = requestUri;
+    }
+
+    public void setMethod(final HttpMethod method) {
+        this.method = method;
+    }
+
+    public void setAddress(final Address address) {
+        this.address = address;
     }
 
     public RequestData(final Request request) {
