@@ -6,7 +6,7 @@ import de.mxro.fn.Function;
 import de.mxro.httpserver.HttpService;
 import de.mxro.httpserver.Request;
 import de.mxro.httpserver.internal.services.DispatchService;
-import de.mxro.httpserver.internal.services.DummyService;
+import de.mxro.httpserver.internal.services.EchoService;
 import de.mxro.httpserver.internal.services.FilterService;
 import de.mxro.httpserver.internal.services.RequestTimeEnforcerService;
 import de.mxro.httpserver.internal.services.SafeShutdownService;
@@ -32,7 +32,7 @@ public final class Services {
     }
 
     public final static HttpService dummyService() {
-        return new DummyService();
+        return new EchoService();
     }
 
 }

@@ -7,7 +7,7 @@ import de.mxro.httpserver.HttpService;
 import de.mxro.httpserver.Request;
 import de.mxro.httpserver.Response;
 
-public class DummyService implements HttpService {
+public class EchoService implements HttpService {
 
     @Override
     public void stop(final SimpleCallback callback) {
@@ -21,9 +21,9 @@ public class DummyService implements HttpService {
 
     @Override
     public void process(final Request request, final Response response, final Closure<SuccessFail> callback) {
-        System.out.println(request.getRequestUri());
+
         response.setResponseCode(200);
-        response.setContent("Hello");
+        response.setContent(request.getData());
         callback.apply(SuccessFail.success());
     }
 
