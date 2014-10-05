@@ -1,5 +1,6 @@
 package de.mxro.httpserver;
 
+import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.util.Map;
 
@@ -71,6 +72,14 @@ public final class RequestData implements Request {
         this.address = address;
     }
 
+    public RequestData() {
+        byte[] buf = new byte[] {};
+        this.inputStream = new ByteArrayInputStream(buf);
+        this.data = null;
+        this.headers = null;
+        this.requestUri = null;
+    }
+    
     public RequestData(final Request request) {
         super();
         this.inputStream = request.getInputStream();
