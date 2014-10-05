@@ -8,7 +8,7 @@ public class HttpServer {
         return new ResponseData();
     }
 
-    public static Request createRequest() {
+    public static RequestData createRequest() {
         return new RequestData();
     }
 
