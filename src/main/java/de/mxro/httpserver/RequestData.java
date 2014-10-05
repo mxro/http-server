@@ -1,11 +1,7 @@
-package de.mxro.httpserver.internal;
+package de.mxro.httpserver;
 
 import java.io.InputStream;
 import java.util.Map;
-
-import de.mxro.httpserver.Address;
-import de.mxro.httpserver.HttpMethod;
-import de.mxro.httpserver.Request;
 
 public final class RequestData implements Request {
 

@@ -1,7 +1,6 @@
 package de.mxro.httpserver;
 
 import de.mxro.httpserver.internal.DummyRequestData;
-import de.mxro.httpserver.internal.RequestData;
 import de.mxro.httpserver.internal.ResponseData;
 
 public class HttpServer {
