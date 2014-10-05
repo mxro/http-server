@@ -45,7 +45,7 @@ public class TestEnforceTimeout {
 			
 			@Override
 			public void onSuccess() {
-				testService.process(HttpServer.createDummyRequest(), HttpServer.createResponse(), new Closure<SuccessFail>() {
+				testService.process(HttpServer.createRequest(), HttpServer.createResponse(), new Closure<SuccessFail>() {
 
 					@Override
 					public void apply(SuccessFail o) {
