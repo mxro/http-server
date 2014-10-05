@@ -21,6 +21,7 @@ public class DummyService implements HttpService {
 
     @Override
     public void process(final Request request, final Response response, final Closure<SuccessFail> callback) {
+        System.out.println(request.getRequestUri());
         response.setResponseCode(200);
         response.setContent("Hello");
         callback.apply(SuccessFail.success());
