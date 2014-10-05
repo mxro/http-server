@@ -24,6 +24,7 @@ public class EchoService implements HttpService {
 
         response.setResponseCode(200);
         response.setContent(request.getData());
+        response.setHeader("REQUEST-URI", request.getRequestUri());
         callback.apply(SuccessFail.success());
     }
 
