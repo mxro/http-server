@@ -7,7 +7,7 @@ import de.mxro.httpserver.internal.services.resources.ClassResourceProvider;
 import de.mxro.httpserver.internal.services.resources.FileResourceProvider;
 import de.mxro.httpserver.internal.services.resources.WebResourceProvider;
 
-public class Resources {
+public final class Resources {
 
     /**
      * Annotates common file types of the web with the proper mimetype based on
@@ -21,7 +21,7 @@ public class Resources {
     }
 
     /**
-     * Caches ALL accessed resources in memory.
+     * Caches ALL accessed resources in memory using a WeakHashMap.
      * 
      * @param decorated
      * @return
