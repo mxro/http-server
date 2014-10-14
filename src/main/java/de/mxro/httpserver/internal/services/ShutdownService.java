@@ -4,6 +4,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import de.mxro.async.callbacks.SimpleCallback;
+import de.mxro.async.internal.Value;
 import de.mxro.fn.Closure;
 import de.mxro.fn.SuccessFail;
 import de.mxro.httpserver.HttpService;
@@ -16,7 +17,7 @@ public final class ShutdownService implements HttpService {
 
     private final String shutdownSecret;
     private final ServerComponent serverToShutdown;
-    private final ServerComponent thisServer;
+    private final Value<ServerComponent> thisServer;
 
     @Override
     public void stop(final SimpleCallback callback) {
