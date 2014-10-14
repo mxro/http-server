@@ -38,7 +38,7 @@ public final class Resources {
      * @param resourcesRoot
      * @return
      */
-    public final static ResourceProvider fromFiles(final File resourceRoot, final String serverRoot) {
+    public final static ResourceProvider fromFolder(final File resourceRoot, final String serverRoot) {
         return new FileResourceProvider(resourceRoot, serverRoot);
     }
 
