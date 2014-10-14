@@ -3,8 +3,8 @@ package de.mxro.httpserver.internal.services;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import de.mxro.async.Value;
 import de.mxro.async.callbacks.SimpleCallback;
-import de.mxro.async.internal.Value;
 import de.mxro.fn.Closure;
 import de.mxro.fn.SuccessFail;
 import de.mxro.httpserver.HttpService;
@@ -67,9 +67,9 @@ public final class ShutdownService implements HttpService {
 
                             @Override
                             public void run() {
-                                assert thisServer != null : "setThisServer() must be specified for this shutdown server.";
+                                assert thisServer.get() != null : "thisServer must be specified for this shutdown server.";
 
-                                thisServer.stop(new ShutdownCallback() {
+                                thisServer.get().stop(new ShutdownCallback() {
 
                                     @Override
                                     public void onSuccess() {
@@ -108,7 +108,8 @@ public final class ShutdownService implements HttpService {
         t.start();
     }
 
-    public ShutdownService(final String secret, final ServerComponent serverToShutdown, final ServerComponent thisServer) {
+    public ShutdownService(final String secret, final ServerComponent serverToShutdown,
+            final Value<ServerComponent> thisServer) {
         super();
         this.shutdownSecret = secret;
         this.serverToShutdown = serverToShutdown;

@@ -2,6 +2,7 @@ package de.mxro.httpserver.services;
 
 import java.util.Map;
 
+import de.mxro.async.Value;
 import de.mxro.fn.Function;
 import de.mxro.httpserver.HttpService;
 import de.mxro.httpserver.Request;
@@ -74,7 +75,7 @@ public final class Services {
     }
 
     public static HttpService shutdown(final String secret, final ServerComponent serverToShutdown,
-            final ServerComponent ownServer) {
+            final Value<ServerComponent> ownServer) {
         return new ShutdownService(secret, serverToShutdown, ownServer);
     }
 
