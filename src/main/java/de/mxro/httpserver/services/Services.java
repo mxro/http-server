@@ -10,6 +10,7 @@ import de.mxro.httpserver.internal.services.EchoService;
 import de.mxro.httpserver.internal.services.FilterService;
 import de.mxro.httpserver.internal.services.RequestTimeEnforcerService;
 import de.mxro.httpserver.internal.services.SafeShutdownService;
+import de.mxro.httpserver.internal.services.StaticDataService;
 
 public final class Services {
 
@@ -33,6 +34,10 @@ public final class Services {
 
     public final static HttpService dummyService() {
         return new EchoService();
+    }
+
+    public final static HttpService data(final byte[] data, final String contentType) {
+        return new StaticDataService(data, contentType);
     }
 
 }
