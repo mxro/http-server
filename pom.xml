@@ -25,6 +25,12 @@
 	<dependencies>
 
 		<dependency>
+			<groupId>de.mxro.server</groupId>
+			<artifactId>server-api</artifactId>
+			<version>[0.0.1,)</version>
+		</dependency>
+
+		<dependency>
 			<groupId>de.mxro.service</groupId>
 			<artifactId>service-api</artifactId>
 			<version>[0.0.1,)</version>
@@ -87,7 +93,7 @@
 				</configuration>
 			</plugin>
 
-			
+
 
 
 			<!-- XXXXXXXXXXXXXXXXXXXXXXXXXXXXX -->
@@ -120,7 +126,7 @@
 				</executions>
 			</plugin>
 
-			
+
 
 			<!-- Cleanup necessary because of PDE tweaks, clear the project directory -->
 			<plugin>
@@ -158,8 +164,8 @@
 					</execution>
 				</executions>
 			</plugin>
-			
-			
+
+
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>findbugs-maven-plugin</artifactId>
@@ -268,7 +274,7 @@
 					</reportPlugins>
 				</configuration>
 			</plugin>
-			
+
 		</plugins>
 
 		<!-- RESOURCES -->
@@ -352,7 +358,7 @@
 			<url>http://maven.appjangle.com/appjangle/releases</url>
 		</repository>
 	</repositories>
-	
+
 	<developers>
 		<developer>
 			<id>mxro</id>
@@ -375,5 +381,5 @@
 		<developerConnection>scm:git:git@github.com:mxro/http-server.git
 		</developerConnection>
 	</scm>
-	
+
 </project>
