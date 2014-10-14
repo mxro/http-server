@@ -34,22 +34,13 @@ public final class Services {
         return new FilterService(test, primary, secondary);
     }
 
-    public final static HttpService dummyService() {
-        return new EchoService();
-    }
-
-    public final static HttpService data(final byte[] data, final String contentType) {
-        return new StaticDataService(data, contentType);
-    }
-
     /**
-     * Allows to server static files from a directory or the classpath.
+     * A service which returns what was sent to it.
      * 
-     * @param provider
      * @return
      */
-    public static HttpService newStaticResourceHandler(final ResourceProvider provider) {
-        return new ResourceService(provider);
+    public final static HttpService echoService() {
+        return new EchoService();
     }
 
     /**
@@ -60,8 +51,18 @@ public final class Services {
      * @param contentType
      * @return
      */
-    public static HttpService newStaticDataHandler(final byte[] data, final String contentType) {
+    public final static HttpService data(final byte[] data, final String contentType) {
         return new StaticDataService(data, contentType);
+    }
+
+    /**
+     * Allows to server static files from a directory or the classpath.
+     * 
+     * @param provider
+     * @return
+     */
+    public static HttpService resources(final ResourceProvider provider) {
+        return new ResourceService(provider);
     }
 
 }
