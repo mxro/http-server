@@ -4,7 +4,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<artifactId>http-server</artifactId>
 	<groupId>de.mxro.httpserver</groupId>
-	<version>0.0.7</version>
+	<version>0.0.8-SNAPSHOT</version>
 	<description>A general API for building HTTP servers.
 	</description>
 	<url>https://github.com/mxro/http-server</url>
