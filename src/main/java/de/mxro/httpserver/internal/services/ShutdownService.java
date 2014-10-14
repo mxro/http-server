@@ -95,7 +95,7 @@ public final class ShutdownService implements HttpService {
                         System.out.println("Failure while shutting down server: " + t.getMessage());
                         t.printStackTrace();
 
-                        Netty3Server.sendHttpSuccess(e, t.getMessage().getBytes(), "text/plain");
+                        callback.apply(SuccessFail.fail(t));
 
                     }
 
@@ -107,10 +107,11 @@ public final class ShutdownService implements HttpService {
         t.start();
     }
 
-    public ShutdownService(final String secret, final ServerComponent serverToShutdown) {
+    public ShutdownService(final String secret, final ServerComponent serverToShutdown, final ServerComponent thisServer) {
         super();
         this.secret = secret;
         this.serverToShutdown = serverToShutdown;
+        this.thisServer = thisServer;
     }
 
 }
