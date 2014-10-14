@@ -14,7 +14,7 @@ import de.mxro.service.callbacks.ShutdownCallback;
 
 public final class ShutdownService implements HttpService {
 
-    private final String secret;
+    private final String shutdownSecret;
     private final ServerComponent serverToShutdown;
     private final ServerComponent thisServer;
 
@@ -37,7 +37,7 @@ public final class ShutdownService implements HttpService {
 
                 final String requestUri = request.getRequestUri();
 
-                if (!requestUri.replace("/", "").equals(secret)) {
+                if (!requestUri.replace("/", "").equals(shutdownSecret)) {
 
                     try {
                         response.setResponseCode(403);
@@ -109,7 +109,7 @@ public final class ShutdownService implements HttpService {
 
     public ShutdownService(final String secret, final ServerComponent serverToShutdown, final ServerComponent thisServer) {
         super();
-        this.secret = secret;
+        this.shutdownSecret = secret;
         this.serverToShutdown = serverToShutdown;
         this.thisServer = thisServer;
     }
