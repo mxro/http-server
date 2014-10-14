@@ -1,6 +1,7 @@
 package de.mxro.httpserver.services;
 
 import java.util.Map;
+import java.util.concurrent.Executor;
 
 import de.mxro.fn.Function;
 import de.mxro.httpserver.HttpService;
@@ -8,6 +9,7 @@ import de.mxro.httpserver.Request;
 import de.mxro.httpserver.internal.services.DispatchService;
 import de.mxro.httpserver.internal.services.EchoService;
 import de.mxro.httpserver.internal.services.FilterService;
+import de.mxro.httpserver.internal.services.ProxyService;
 import de.mxro.httpserver.internal.services.RequestTimeEnforcerService;
 import de.mxro.httpserver.internal.services.ResourceService;
 import de.mxro.httpserver.internal.services.SafeShutdownService;
@@ -63,6 +65,12 @@ public final class Services {
      */
     public static HttpService resources(final ResourceProvider provider) {
         return new ResourceService(provider);
+    }
+
+    public static HttpService forward(final String destinationHost, final int destinationPort,
+            final Executor executor) {
+    
+        return new ProxyService(destinationHost, destinationPort);
     }
 
 }

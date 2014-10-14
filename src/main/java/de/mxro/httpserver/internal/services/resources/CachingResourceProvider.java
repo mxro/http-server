@@ -6,7 +6,7 @@ import java.util.Map;
 import de.mxro.httpserver.resources.Resource;
 import de.mxro.httpserver.resources.ResourceProvider;
 
-public class CachingResourceProvider implements ResourceProvider {
+public final class CachingResourceProvider implements ResourceProvider {
 
     private final ResourceProvider decorated;
 
