@@ -12,7 +12,7 @@ import de.mxro.httpserver.internal.services.FilterService;
 import de.mxro.httpserver.internal.services.ProxyService;
 import de.mxro.httpserver.internal.services.RequestTimeEnforcerService;
 import de.mxro.httpserver.internal.services.ResourceService;
-import de.mxro.httpserver.internal.services.SafeShutdownService;
+import de.mxro.httpserver.internal.services.SafeShutdownGuard;
 import de.mxro.httpserver.internal.services.ShutdownService;
 import de.mxro.httpserver.internal.services.StaticDataService;
 import de.mxro.httpserver.resources.ResourceProvider;
@@ -25,7 +25,7 @@ public final class Services {
     }
 
     public static HttpService safeShutdown(final HttpService service) {
-        return new SafeShutdownService(service);
+        return new SafeShutdownGuard(service);
     }
 
     public static HttpService limitTime(final long maxCallTimeInMs, final HttpService decoratedService) {

@@ -18,7 +18,7 @@ import de.mxro.service.utils.ShutdownHelper;
  * @author Max
  * 
  */
-public class SafeShutdownService implements HttpService {
+public class SafeShutdownGuard implements HttpService {
 
     private final HttpService decorated;
 
@@ -64,7 +64,7 @@ public class SafeShutdownService implements HttpService {
         this.decorated.start(callback);
     }
 
-    public SafeShutdownService(final HttpService decorated) {
+    public SafeShutdownGuard(final HttpService decorated) {
         super();
         this.decorated = decorated;
         this.operationCounter = ServicesJre.createOperationCounter();
