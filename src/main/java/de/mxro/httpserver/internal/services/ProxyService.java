@@ -20,7 +20,7 @@ import de.mxro.httpserver.HttpService;
 import de.mxro.httpserver.Request;
 import de.mxro.httpserver.Response;
 
-public class ProxyService implements HttpService {
+public final class ProxyService implements HttpService {
 
     private final String destinationHost;
     private final int destinationPort;
