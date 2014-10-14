@@ -1,6 +1,5 @@
 package de.mxro.httpserver.internal.services;
 
-import java.io.UnsupportedEncodingException;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -17,6 +16,7 @@ public final class ShutdownService implements HttpService {
 
     private final String secret;
     private final ServerComponent serverToShutdown;
+    private final ServerComponent thisServer;
 
     @Override
     public void stop(final SimpleCallback callback) {
@@ -40,11 +40,10 @@ public final class ShutdownService implements HttpService {
                 if (!requestUri.replace("/", "").equals(secret)) {
 
                     try {
-                        Netty3Server
-                        .sendHttpResponse(
-                                e,
-                                "Access denied. You must supply the master secret for this server as part of the url, eg: http://myserver.com:8900/[your secret]"
-                                .getBytes("UTF-8"), 403, "text/plain");
+                        response.setResponseCode(403);
+                        response.setMimeType("text/plain");
+                        response.setContent("Access denied. You must supply the master secret for this server as part of the url, eg: http://myserver.com:8900/[your secret]");
+                        callback.apply(SuccessFail.success());
 
                         return;
                     } catch (final Throwable t) {
@@ -53,44 +52,40 @@ public final class ShutdownService implements HttpService {
 
                 }
 
-                shutdownOperations.stop(new ShutdownCallback() {
+                serverToShutdown.stop(new ShutdownCallback() {
 
                     @Override
                     public void onSuccess() {
 
-                        try {
-                            // new Exception("Shutdown successful")
-                            // .printStackTrace();
-                            Netty3Server.sendHttpSuccess(e, "Shutdown successful.".getBytes("UTF-8"), "text/plain");
+                        response.setResponseCode(200);
+                        response.setMimeType("text/plain");
+                        response.setContent("Shutdown successful.");
+                        callback.apply(SuccessFail.success());
 
-                            final TimerTask stopShutdownServer = new TimerTask() {
+                        final TimerTask stopShutdownServer = new TimerTask() {
 
-                                @Override
-                                public void run() {
-                                    assert thisServer != null : "setThisServer() must be specified for this shutdown server.";
+                            @Override
+                            public void run() {
+                                assert thisServer != null : "setThisServer() must be specified for this shutdown server.";
 
-                                    thisServer.stop(new ShutdownCallback() {
+                                thisServer.stop(new ShutdownCallback() {
 
-                                        @Override
-                                        public void onSuccess() {
-                                            // all ok
+                                    @Override
+                                    public void onSuccess() {
+                                        // all ok
 
-                                        }
+                                    }
 
-                                        @Override
-                                        public void onFailure(final Throwable t) {
-                                            throw new RuntimeException(t);
-                                        }
-                                    });
-                                }
+                                    @Override
+                                    public void onFailure(final Throwable t) {
+                                        throw new RuntimeException(t);
+                                    }
+                                });
+                            }
 
-                            };
+                        };
 
-                            new Timer().schedule(stopShutdownServer, 150);
-
-                        } catch (final UnsupportedEncodingException e1) {
-                            throw new RuntimeException(e1);
-                        }
+                        new Timer().schedule(stopShutdownServer, 150);
 
                     }
 
