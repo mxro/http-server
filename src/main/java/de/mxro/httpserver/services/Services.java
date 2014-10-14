@@ -2,6 +2,7 @@ package de.mxro.httpserver.services;
 
 import java.util.Map;
 
+import nx.restserver.netty.internal.services.ResourceService;
 import de.mxro.fn.Function;
 import de.mxro.httpserver.HttpService;
 import de.mxro.httpserver.Request;
@@ -11,6 +12,7 @@ import de.mxro.httpserver.internal.services.FilterService;
 import de.mxro.httpserver.internal.services.RequestTimeEnforcerService;
 import de.mxro.httpserver.internal.services.SafeShutdownService;
 import de.mxro.httpserver.internal.services.StaticDataService;
+import de.mxro.httpserver.resources.ResourceProvider;
 
 public final class Services {
 
@@ -38,6 +40,16 @@ public final class Services {
 
     public final static HttpService data(final byte[] data, final String contentType) {
         return new StaticDataService(data, contentType);
+    }
+
+    /**
+     * Allows to server static files from a directory or the classpath.
+     * 
+     * @param provider
+     * @return
+     */
+    public static HttpService newStaticResourceHandler(final ResourceProvider provider) {
+        return new ResourceService(provider);
     }
 
 }

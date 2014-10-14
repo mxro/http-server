@@ -3,7 +3,8 @@ package de.mxro.httpserver.internal.services.resources;
 import java.util.HashMap;
 import java.util.Map;
 
-import de.mxro.httpserver.ResourceProvider;
+import de.mxro.httpserver.resources.Resource;
+import de.mxro.httpserver.resources.ResourceProvider;
 
 public class CachingResourceProvider implements ResourceProvider {
 

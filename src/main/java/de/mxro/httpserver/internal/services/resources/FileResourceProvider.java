@@ -8,7 +8,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-import de.mxro.httpserver.ResourceProvider;
+import de.mxro.httpserver.resources.Resource;
+import de.mxro.httpserver.resources.ResourceProvider;
 
 public final class FileResourceProvider implements ResourceProvider {
 

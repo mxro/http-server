@@ -1,6 +1,7 @@
 package de.mxro.httpserver.internal.services.resources;
 
-import de.mxro.httpserver.ResourceProvider;
+import de.mxro.httpserver.resources.Resource;
+import de.mxro.httpserver.resources.ResourceProvider;
 
 public class WebResourceProvider implements ResourceProvider {
 
