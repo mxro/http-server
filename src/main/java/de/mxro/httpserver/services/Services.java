@@ -1,7 +1,6 @@
 package de.mxro.httpserver.services;
 
 import java.util.Map;
-import java.util.concurrent.Executor;
 
 import de.mxro.fn.Function;
 import de.mxro.httpserver.HttpService;
@@ -67,9 +66,8 @@ public final class Services {
         return new ResourceService(provider);
     }
 
-    public static HttpService forward(final String destinationHost, final int destinationPort,
-            final Executor executor) {
-    
+    public static HttpService forward(final String destinationHost, final int destinationPort) {
+
         return new ProxyService(destinationHost, destinationPort);
     }
 
