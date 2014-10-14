@@ -2,7 +2,6 @@ package de.mxro.httpserver.services;
 
 import java.util.Map;
 
-import nx.restserver.netty.internal.services.ResourceService;
 import de.mxro.fn.Function;
 import de.mxro.httpserver.HttpService;
 import de.mxro.httpserver.Request;
@@ -10,6 +9,7 @@ import de.mxro.httpserver.internal.services.DispatchService;
 import de.mxro.httpserver.internal.services.EchoService;
 import de.mxro.httpserver.internal.services.FilterService;
 import de.mxro.httpserver.internal.services.RequestTimeEnforcerService;
+import de.mxro.httpserver.internal.services.ResourceService;
 import de.mxro.httpserver.internal.services.SafeShutdownService;
 import de.mxro.httpserver.internal.services.StaticDataService;
 import de.mxro.httpserver.resources.ResourceProvider;
@@ -50,6 +50,18 @@ public final class Services {
      */
     public static HttpService newStaticResourceHandler(final ResourceProvider provider) {
         return new ResourceService(provider);
+    }
+
+    /**
+     * Allows to serve the same byte array for every request. Useful for
+     * robots.txt etc.
+     * 
+     * @param data
+     * @param contentType
+     * @return
+     */
+    public static HttpService newStaticDataHandler(final byte[] data, final String contentType) {
+        return new StaticDataService(data, contentType);
     }
 
 }
