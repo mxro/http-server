@@ -12,8 +12,10 @@ import de.mxro.httpserver.internal.services.ProxyService;
 import de.mxro.httpserver.internal.services.RequestTimeEnforcerService;
 import de.mxro.httpserver.internal.services.ResourceService;
 import de.mxro.httpserver.internal.services.SafeShutdownService;
+import de.mxro.httpserver.internal.services.ShutdownService;
 import de.mxro.httpserver.internal.services.StaticDataService;
 import de.mxro.httpserver.resources.ResourceProvider;
+import de.mxro.server.ServerComponent;
 
 public final class Services {
 
@@ -69,6 +71,11 @@ public final class Services {
     public static HttpService forward(final String destinationHost, final int destinationPort) {
 
         return new ProxyService(destinationHost, destinationPort);
+    }
+
+    public static HttpService shutdown(final String secret, final ServerComponent serverToShutdown,
+            final ServerComponent ownServer) {
+        return new ShutdownService(secret, serverToShutdown, ownServer);
     }
 
 }
