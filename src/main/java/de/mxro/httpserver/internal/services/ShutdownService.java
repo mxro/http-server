@@ -8,7 +8,7 @@ import de.mxro.httpserver.Request;
 import de.mxro.httpserver.Response;
 import de.mxro.server.ServerComponent;
 
-public class ShutdownService implements HttpService {
+public final class ShutdownService implements HttpService {
 
     private final String secret;
     private final ServerComponent serverToShutdown;
