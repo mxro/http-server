@@ -38,7 +38,8 @@ public final class ShutdownService implements HttpService {
 
                 final String requestUri = request.getRequestUri();
 
-                if (!requestUri.replace("/", "").equals(shutdownSecret)) {
+                String replace = requestUri.replace("/", "");
+                if (!replace.equals(shutdownSecret)) {
 
                     try {
                         response.setResponseCode(403);
