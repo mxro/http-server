@@ -57,9 +57,10 @@ public class ResourceService implements HttpService {
 
                         response.setHeader("Expires", (now + maxCache) + "");
                         response.setHeader("Last-Modified", now + "");
-                        response.setHeader("Cache-Control", "max-age=" + maxCache + ", public");
+
                         // cache control 'public' is important for resources to
                         // be cached when SSL is used
+                        response.setHeader("Cache-Control", "max-age=" + maxCache + ", public");
 
                         callback.apply(SuccessFail.success());
                         return;
