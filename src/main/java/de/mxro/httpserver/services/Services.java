@@ -43,7 +43,7 @@ public final class Services {
      * 
      * @return
      */
-    public final static HttpService echoService() {
+    public final static HttpService echo() {
         return new EchoService();
     }
 
