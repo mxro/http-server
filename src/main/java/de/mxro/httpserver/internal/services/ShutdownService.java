@@ -40,7 +40,7 @@ public final class ShutdownService implements HttpService {
 
                 final String suppliedSecret = requestUri.replace("/", "");
 
-                System.out.println(suppliedSecret);
+                System.out.println("received secret" + suppliedSecret);
                 if (!suppliedSecret.equals(shutdownSecret)) {
 
                     try {
