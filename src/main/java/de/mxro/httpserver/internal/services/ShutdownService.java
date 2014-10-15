@@ -40,7 +40,6 @@ public final class ShutdownService implements HttpService {
 
                 final String suppliedSecret = requestUri.replace("/", "");
 
-                // System.out.println("received secret" + suppliedSecret);
                 if (!suppliedSecret.equals(shutdownSecret)) {
 
                     try {
@@ -76,6 +75,7 @@ public final class ShutdownService implements HttpService {
 
                                     @Override
                                     public void onSuccess() {
+                                        // System.out.println("This server stopped.");
                                         // all ok
 
                                     }
@@ -89,7 +89,7 @@ public final class ShutdownService implements HttpService {
 
                         };
 
-                        new Timer().schedule(stopShutdownServer, 150);
+                        new Timer().schedule(stopShutdownServer, 350);
 
                     }
 
