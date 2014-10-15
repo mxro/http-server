@@ -60,9 +60,7 @@ public class ResponseData implements Response {
         if (headers == null) {
             headers = new HashMap<String, String>();
         }
-        if (key.equals("REQUEST-URI")) {
-            throw new RuntimeException("Here");
-        }
+
         headers.put(key, value);
     }
 
