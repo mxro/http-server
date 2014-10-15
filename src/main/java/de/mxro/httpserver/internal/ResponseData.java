@@ -9,91 +9,91 @@ import de.mxro.httpserver.Response;
 
 public class ResponseData implements Response {
 
-	private byte[] content;
-	private int responseCode;
-	String mimeType;
-	Map<String, String> headers;
-	
-	@Override
-	public byte[] getContent() {
-		return content;
-	}
+    private byte[] content;
+    private int responseCode;
+    String mimeType;
+    Map<String, String> headers;
 
-	public void setContent(byte[] content) {
-		this.content = content;
-	}
+    @Override
+    public byte[] getContent() {
+        return content;
+    }
 
-	
-	
-	@Override
-	public void setContent(String content) {
-		try {
-			this.setContent(content.getBytes("UTF-8"));
-		} catch (UnsupportedEncodingException e) {
-			throw new RuntimeException(e);
-		}
-	}
+    @Override
+    public void setContent(final byte[] content) {
+        this.content = content;
+    }
 
-	@Override
-	public int getResponseCode() {
-		return responseCode;
-	}
+    @Override
+    public void setContent(final String content) {
+        try {
+            this.setContent(content.getBytes("UTF-8"));
+        } catch (final UnsupportedEncodingException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
-	public void setResponseCode(int responseCode) {
-		this.responseCode = responseCode;
-	}
+    @Override
+    public int getResponseCode() {
+        return responseCode;
+    }
 
-	@Override
-	public String getMimeType() {
-		
-		return mimeType;
-	}
+    @Override
+    public void setResponseCode(final int responseCode) {
+        this.responseCode = responseCode;
+    }
 
-	@Override
-	public void setMimeType(String mimeType) {
-		this.mimeType = mimeType;
-		setHeader("Content-Type", mimeType);
-	}
+    @Override
+    public String getMimeType() {
 
-	@Override
-	public void setHeader(String key, String value) {
-		if (headers == null) {
-			headers = new HashMap<String, String>();
-		}
-		headers.put(key, value);
-	}
+        return mimeType;
+    }
 
-	@Override
-	public Map<String, String> getHeaders() {
-		if (headers == null) {
-			headers = new HashMap<String, String>();
-		}
-		return headers;
-	}
-	
-	
-	
-	@Override
-	public void setAll(Response from) {
-		this.setContent(from.getContent());
-		this.setMimeType(from.getMimeType());
-		this.setResponseCode(from.getResponseCode());
-		
-		this.headers.clear();
-		
-		for (Entry<String, String> e: from.getHeaders().entrySet()) {
-			this.setHeader(e.getKey(), e.getValue());
-		}
-		
-		
-	}
+    @Override
+    public void setMimeType(final String mimeType) {
+        this.mimeType = mimeType;
+        setHeader("Content-Type", mimeType);
+    }
 
-	public ResponseData() {
-		super();
-		this.content = new byte[] {};
-		this.responseCode = 200;
-		this.mimeType = "text/plain";
-		this.headers = null;
-	}
+    @Override
+    public void setHeader(final String key, final String value) {
+        if (headers == null) {
+            headers = new HashMap<String, String>();
+        }
+        if (key.equals("REQUEST-URI")) {
+            throw new RuntimeException("Here");
+        }
+        headers.put(key, value);
+    }
+
+    @Override
+    public Map<String, String> getHeaders() {
+        if (headers == null) {
+            headers = new HashMap<String, String>();
+        }
+        return headers;
+    }
+
+    @Override
+    public void setAll(final Response from) {
+        this.setContent(from.getContent());
+        this.setMimeType(from.getMimeType());
+        this.setResponseCode(from.getResponseCode());
+
+        this.headers.clear();
+
+        for (final Entry<String, String> e : from.getHeaders().entrySet()) {
+            this.setHeader(e.getKey(), e.getValue());
+        }
+
+    }
+
+    public ResponseData() {
+        super();
+        this.content = new byte[] {};
+        this.responseCode = 200;
+        this.mimeType = "text/plain";
+        this.headers = null;
+    }
 
 }
