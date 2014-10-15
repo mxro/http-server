@@ -1,5 +1,6 @@
 package de.mxro.httpserver;
 
+import de.mxro.sslutils.SslKeyStoreData;
 
 public interface HttpsServerConfiguration extends HttpServerConfiguration {
 
