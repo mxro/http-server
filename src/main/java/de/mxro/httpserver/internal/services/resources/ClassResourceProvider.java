@@ -19,7 +19,7 @@ public class ClassResourceProvider implements ResourceProvider {
     public Resource getResource(final String path) {
 
         final String classpath = path.replaceFirst(serverRoot, resourcesRoot);
-        System.out.println(classpath);
+        // System.out.println(classpath);
 
         final InputStream resourceAsStream = resourceRoot.getResourceAsStream(classpath);
 
