@@ -56,4 +56,17 @@ public final class Resources {
         return new ClassResourceProvider(resourceRoot, serverRoot, resourcesRoot);
     }
 
+    /**
+     * Uses getClass().getResourceAsString() on the provided resourceRoot object
+     * to select resources in Java packages.
+     * 
+     * @param resourceRoot
+     * @param serverRoot
+     * @param resourcesRoot
+     * @return
+     */
+    public static ResourceProvider fromClasspath(final Class<?> resourceRoot) {
+        return new ClassResourceProvider(resourceRoot, "/", "");
+    }
+
 }
