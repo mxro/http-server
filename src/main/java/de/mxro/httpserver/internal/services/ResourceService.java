@@ -94,6 +94,7 @@ public class ResourceService implements HttpService {
 
     @Override
     public void start(final SimpleCallback callback) {
+
         this.executor = ConcurrencyJre.create().newExecutor().newParallelExecutor(5, this);
 
         callback.onSuccess();
