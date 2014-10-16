@@ -18,8 +18,10 @@ public class ClassResourceProvider implements ResourceProvider {
     @Override
     public Resource getResource(final String path) {
 
-        final InputStream resourceAsStream = resourceRoot.getResourceAsStream(path.replaceFirst(serverRoot,
-                resourcesRoot));
+        final String classpath = path.replaceFirst(serverRoot, resourcesRoot);
+        System.out.println(classpath);
+
+        final InputStream resourceAsStream = resourceRoot.getResourceAsStream(classpath);
 
         if (resourceAsStream == null) {
             return null;
