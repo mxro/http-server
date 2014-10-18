@@ -29,6 +29,7 @@ public class ResourceService implements HttpService {
         final String ifModifiedSince = request.getHeader("If-Modified-Since");
         if (ifModifiedSince != null && !ifModifiedSince.equals("")) {
 
+            Long.parseLong(ifModifiedSince);
             // TODO add some logic so that files are not cached indefinitely
 
             final Date modifiedSince = ResourceService_DateUtil.parseDate(ifModifiedSince);
