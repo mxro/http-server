@@ -78,6 +78,15 @@ public final class ResourceService_DateUtil {
         DEFAULT_TWO_DIGIT_YEAR_START = calendar.getTime();
     }
 
+    public static Date parseDateFromHttpHeader(final String dateValue) {
+        try {
+            final long time = Long.parseLong(dateValue);
+            return new Date(time);
+        } catch (final NumberFormatException e) {
+            return ResourceService_DateUtil.parseDate(dateValue);
+        }
+    }
+
     /**
      * Parses a date value. The formats used for parsing the date value are
      * retrieved from the default http params.
