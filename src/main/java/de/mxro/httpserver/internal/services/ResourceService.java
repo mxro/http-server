@@ -31,8 +31,6 @@ public class ResourceService implements HttpService {
 
             final Date date = ResourceService_DateUtil.parseDateFromHttpHeader(ifModifiedSince);
 
-            // if (date.g)
-
             // TODO add some logic so that files are not cached indefinitely
 
             response.setResponseCode(304); // not modified
@@ -49,24 +47,18 @@ public class ResourceService implements HttpService {
                 final Resource resource = provider.getResource(requestUri);
 
                 if (resource != null) {
+                    response.setContent(resource.getData());
+                    response.setMimeType(resource.getMimetype());
                     if (requestUri.contains(".nocache.")) {
-                        response.setContent(resource.getData());
-                        response.setMimeType(resource.getMimetype());
+                        // cache resources for at least 1 s
+                        writeHeadersForCaching(response, 1000);
+
                         callback.apply(SuccessFail.success());
                         return;
                     } else {
-                        response.setContent(resource.getData());
-                        response.setMimeType(resource.getMimetype());
 
                         final int maxCache = 60 * 60000;
-                        final long now = System.currentTimeMillis();
-
-                        response.setHeader("Expires", (now + maxCache) + "");
-                        response.setHeader("Last-Modified", now + "");
-
-                        // cache control 'public' is important for resources to
-                        // be cached when SSL is used
-                        response.setHeader("Cache-Control", "max-age=" + maxCache + ", public");
+                        writeHeadersForCaching(response, maxCache);
 
                         callback.apply(SuccessFail.success());
                         return;
@@ -78,6 +70,17 @@ public class ResourceService implements HttpService {
                     callback.apply(SuccessFail.success());
                     return;
                 }
+            }
+
+            private void writeHeadersForCaching(final Response response, final int maxCache) {
+                final long now = System.currentTimeMillis();
+
+                response.setHeader("Expires", (now + maxCache) + "");
+                response.setHeader("Last-Modified", now + "");
+
+                // cache control 'public' is important for resources to
+                // be cached when SSL is used
+                response.setHeader("Cache-Control", "max-age=" + maxCache + ", public");
             }
         });
     }
