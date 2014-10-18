@@ -1,7 +1,5 @@
 package de.mxro.httpserver.internal.services;
 
-import java.util.Date;
-
 import de.mxro.async.callbacks.SimpleCallback;
 import de.mxro.concurrency.jre.ConcurrencyJre;
 import de.mxro.concurrency.wrappers.SimpleExecutor;
@@ -29,14 +27,7 @@ public class ResourceService implements HttpService {
         final String ifModifiedSince = request.getHeader("If-Modified-Since");
         if (ifModifiedSince != null && !ifModifiedSince.equals("")) {
 
-            try {
-                Long.parseLong(ifModifiedSince);
-            } catch (final NumberFormatException e) {
-
-            }
             // TODO add some logic so that files are not cached indefinitely
-
-            final Date modifiedSince = ResourceService_DateUtil.parseDate(ifModifiedSince);
 
             response.setResponseCode(304); // not modified
             callback.apply(SuccessFail.success());
