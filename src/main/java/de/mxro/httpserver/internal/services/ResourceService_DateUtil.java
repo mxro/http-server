@@ -78,6 +78,10 @@ public final class ResourceService_DateUtil {
         DEFAULT_TWO_DIGIT_YEAR_START = calendar.getTime();
     }
 
+    public static boolean hasChanged(final long ifModifiedSince, final long lastModified) {
+        return lastModified > ifModifiedSince;
+    }
+
     public static Date parseDateFromHttpHeader(final String dateValue) {
         try {
             final long time = Long.parseLong(dateValue);
