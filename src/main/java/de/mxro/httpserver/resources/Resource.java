@@ -2,10 +2,10 @@ package de.mxro.httpserver.resources;
 
 public interface Resource {
 
-    public byte[] getData();
+    public byte[] data();
 
-    public String getMimetype();
+    public String mimetype();
 
-    public long getLastModified();
+    public long lastModified();
 
 }

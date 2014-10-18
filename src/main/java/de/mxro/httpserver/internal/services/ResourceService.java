@@ -47,8 +47,8 @@ public class ResourceService implements HttpService {
                 final Resource resource = provider.getResource(requestUri);
 
                 if (resource != null) {
-                    response.setContent(resource.getData());
-                    response.setMimeType(resource.getMimetype());
+                    response.setContent(resource.data());
+                    response.setMimeType(resource.mimetype());
                     if (requestUri.contains(".nocache.")) {
                         // cache resources for at least 1 s
                         writeHeadersForCaching(response, 1000);

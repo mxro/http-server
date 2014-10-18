@@ -15,7 +15,7 @@ public class WebResourceProvider implements ResourceProvider {
             return null;
         }
 
-        String mimetype = resource.getMimetype();
+        String mimetype = resource.mimetype();
         if (path.endsWith(".html")) {
             mimetype = "text/html";
         } else if (path.endsWith(".js")) {
@@ -36,18 +36,18 @@ public class WebResourceProvider implements ResourceProvider {
         return new Resource() {
 
             @Override
-            public byte[] getData() {
-                return resource.getData();
+            public byte[] data() {
+                return resource.data();
             }
 
             @Override
-            public String getMimetype() {
+            public String mimetype() {
                 return closedMimetype;
             }
 
             @Override
-            public long getLastModified() {
-                return resource.getLastModified();
+            public long lastModified() {
+                return resource.lastModified();
             }
 
         };

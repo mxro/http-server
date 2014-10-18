@@ -40,17 +40,17 @@ public final class FileResourceProvider implements ResourceProvider {
         return new Resource() {
 
             @Override
-            public String getMimetype() {
+            public String mimetype() {
                 return "";
             }
 
             @Override
-            public byte[] getData() {
+            public byte[] data() {
                 return data;
             }
 
             @Override
-            public long getLastModified() {
+            public long lastModified() {
                 return file.lastModified();
             }
         };

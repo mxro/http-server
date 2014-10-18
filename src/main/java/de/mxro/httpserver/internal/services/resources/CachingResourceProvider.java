@@ -15,17 +15,17 @@ public final class CachingResourceProvider implements ResourceProvider {
     private final static class Null implements Resource {
 
         @Override
-        public byte[] getData() {
+        public byte[] data() {
             throw new RuntimeException("null");
         }
 
         @Override
-        public String getMimetype() {
+        public String mimetype() {
             throw new RuntimeException("null");
         }
 
         @Override
-        public long getLastModified() {
+        public long lastModified() {
             throw new RuntimeException("null");
         }
 
