@@ -23,32 +23,34 @@ public class ResourceService implements HttpService {
     @Override
     public void process(final Request request, final Response response, final Closure<SuccessFail> callback) {
 
-        final String requestUri = request.getRequestUri();
-
-        // Cache Validation
-        final String ifModifiedSince = request.getHeader("If-Modified-Since");
-        if (ifModifiedSince != null && !ifModifiedSince.equals("")) {
-
-            final Date date = ResourceService_DateUtil.parseDateFromHttpHeader(ifModifiedSince);
-
-            // TODO add some logic so that files are not cached indefinitely
-
-            response.setResponseCode(304); // not modified
-            callback.apply(SuccessFail.success());
-
-            return;
-
-        }
-
         this.executor.execute(new Runnable() {
 
             @Override
             public void run() {
+
+                final String requestUri = request.getRequestUri();
+
                 final Resource resource = provider.getResource(requestUri);
 
                 if (resource != null) {
                     response.setContent(resource.data());
                     response.setMimeType(resource.mimetype());
+
+                    // Cache Validation
+                    final String ifModifiedSinceHeader = request.getHeader("If-Modified-Since");
+                    if (ifModifiedSinceHeader != null && !ifModifiedSinceHeader.equals("")) {
+
+                        final Date ifModifiedSince = ResourceService_DateUtil.parseDateFromHttpHeader(ifModifiedSinceHeader);
+
+                        if (ifModifiedSince.getTime() > resource.lastModified()) {
+
+                            response.setResponseCode(304); // not modified
+                            callback.apply(SuccessFail.success());
+                            return;
+                        }
+
+                    }
+
                     if (requestUri.contains(".nocache.")) {
                         // cache resources for at least 1 s
                         writeHeadersForCaching(response, 1000);
