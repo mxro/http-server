@@ -31,6 +31,8 @@ public class ResourceService implements HttpService {
 
             final Date date = ResourceService_DateUtil.parseDateFromHttpHeader(ifModifiedSince);
 
+            // if (date.g)
+
             // TODO add some logic so that files are not cached indefinitely
 
             response.setResponseCode(304); // not modified
