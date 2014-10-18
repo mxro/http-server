@@ -21,11 +21,12 @@ public final class FileResourceProvider implements ResourceProvider {
     public final Resource getResource(final String path) {
 
         InputStream resourceAsStream;
+        final String derivedPath = path.replaceFirst(serverRoot, resourceRoot.getAbsolutePath());
+
+        final File file = new File(derivedPath);
         try {
 
-            final String derivedPath = path.replaceFirst(serverRoot, resourceRoot.getAbsolutePath());
-
-            resourceAsStream = new FileInputStream(new File(derivedPath));
+            resourceAsStream = new FileInputStream(file);
         } catch (final FileNotFoundException e) {
             return null;
         }
@@ -46,6 +47,11 @@ public final class FileResourceProvider implements ResourceProvider {
             @Override
             public byte[] getData() {
                 return data;
+            }
+
+            @Override
+            public long getLastModified() {
+                return file.lastModified();
             }
         };
     }

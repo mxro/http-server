@@ -6,6 +6,6 @@ public interface Resource {
 
     public String getMimetype();
 
-    private long getLastModified();
+    public long getLastModified();
 
 }

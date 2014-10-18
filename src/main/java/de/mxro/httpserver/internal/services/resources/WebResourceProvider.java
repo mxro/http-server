@@ -20,8 +20,8 @@ public class WebResourceProvider implements ResourceProvider {
             mimetype = "text/html";
         } else if (path.endsWith(".js")) {
             mimetype = "text/javascript"; // correct would be
-                                          // application/javascript but
-                                          // text/javascript more compatible
+            // application/javascript but
+            // text/javascript more compatible
         } else if (path.endsWith(".png")) {
             mimetype = "image/png";
         } else if (path.endsWith(".gif")) {
@@ -43,6 +43,11 @@ public class WebResourceProvider implements ResourceProvider {
             @Override
             public String getMimetype() {
                 return closedMimetype;
+            }
+
+            @Override
+            public long getLastModified() {
+                return resource.getLastModified();
             }
 
         };
