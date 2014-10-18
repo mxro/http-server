@@ -8,7 +8,9 @@ public class TestIfModifiedSince {
 
     @Test
     public void test() {
-        System.out.println(ResourceService_DateUtil.parseDateFromHttpHeader("1412551431938"));
+        ResourceService_DateUtil.parseDateFromHttpHeader("1412551431938");
+
+        ResourceService_DateUtil.parseDateFromHttpHeader("Thu, 29 Mar 2012 18:19:50 GMT");
     }
 
 }
