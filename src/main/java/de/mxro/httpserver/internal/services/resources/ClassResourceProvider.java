@@ -4,6 +4,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.Date;
 
 import de.mxro.httpserver.resources.Resource;
 import de.mxro.httpserver.resources.ResourceProvider;
@@ -43,6 +44,11 @@ public class ClassResourceProvider implements ResourceProvider {
             @Override
             public byte[] getData() {
                 return data;
+            }
+
+            @Override
+            public long getLastModified() {
+                return new Date().getTime();
             }
         };
     }

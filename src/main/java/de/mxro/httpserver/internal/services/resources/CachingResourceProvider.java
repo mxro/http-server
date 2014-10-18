@@ -23,6 +23,12 @@ public final class CachingResourceProvider implements ResourceProvider {
         public String getMimetype() {
             throw new RuntimeException("null");
         }
+
+        @Override
+        public long getLastModified() {
+            throw new RuntimeException("null");
+        }
+
     };
 
     private final static Resource NULL = new Null();
