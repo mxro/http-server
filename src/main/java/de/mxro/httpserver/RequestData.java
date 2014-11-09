@@ -2,6 +2,7 @@ package de.mxro.httpserver;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -102,6 +103,12 @@ public final class RequestData implements Request {
         this.requestUri = request.getRequestUri();
         this.method = request.getMethod();
         this.address = request.getSourceAddress();
+    }
+
+    @Override
+    public String toString() {
+        return "RequestData [inputStream=" + inputStream + ", data=" + Arrays.toString(data) + ", headers=" + headers
+                + ", requestUri=" + requestUri + ", method=" + method + ", address=" + address + "]";
     }
 
 }

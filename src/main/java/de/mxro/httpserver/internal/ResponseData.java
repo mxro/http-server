@@ -1,6 +1,7 @@
 package de.mxro.httpserver.internal;
 
 import java.io.UnsupportedEncodingException;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -92,6 +93,12 @@ public class ResponseData implements Response {
         this.responseCode = 200;
         this.mimeType = "text/plain";
         this.headers = null;
+    }
+
+    @Override
+    public String toString() {
+        return "ResponseData [content=" + Arrays.toString(content) + ", responseCode=" + responseCode + ", mimeType="
+                + mimeType + ", headers=" + headers + "]";
     }
 
 }
