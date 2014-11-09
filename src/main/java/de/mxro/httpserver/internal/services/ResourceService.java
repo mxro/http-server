@@ -44,7 +44,7 @@ public class ResourceService implements HttpService {
                                 .parseDateFromHttpHeader(ifModifiedSinceHeader);
 
                         if (!ResourceService_DateUtil.hasChanged(ifModifiedSince.getTime(), resource.lastModified())) {
-                            response.setContent("Not changed.");
+                            response.setContent("");
                             response.setResponseCode(304); // not modified
                             callback.apply(SuccessFail.success());
                             return;
