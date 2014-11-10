@@ -36,6 +36,7 @@ public class ResourceService implements HttpService {
                     response.setContent(resource.data());
                     response.setMimeType(resource.mimetype());
 
+                    final int maxCache = 60 * 60000;
                     // Cache Validation
                     final String ifModifiedSinceHeader = request.getHeader("If-Modified-Since");
                     if (ifModifiedSinceHeader != null && !ifModifiedSinceHeader.equals("")) {
@@ -46,8 +47,7 @@ public class ResourceService implements HttpService {
                         if (!ResourceService_DateUtil.hasChanged(ifModifiedSince.getTime(), resource.lastModified())) {
 
                             response.setContent("");
-                            response.setMimeType("");
-                            response.setHeader("Last-Modified", String.valueOf(resource.lastModified()));
+                            writeHeadersForCaching(response, maxCache);
                             response.setResponseCode(304); // not modified
                             callback.apply(SuccessFail.success());
                             return;
@@ -63,7 +63,6 @@ public class ResourceService implements HttpService {
                         return;
                     } else {
 
-                        final int maxCache = 60 * 60000;
                         writeHeadersForCaching(response, maxCache);
 
                         callback.apply(SuccessFail.success());
