@@ -47,7 +47,7 @@ public class ResourceService implements HttpService {
 
                             response.setContent("");
                             response.setMimeType("");
-                            response.setHeader("Last-Modified", resource.lastModified());
+                            response.setHeader("Last-Modified", String.valueOf(resource.lastModified()));
                             response.setResponseCode(304); // not modified
                             callback.apply(SuccessFail.success());
                             return;
