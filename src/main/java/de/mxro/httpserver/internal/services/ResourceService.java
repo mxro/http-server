@@ -49,6 +49,7 @@ public class ResourceService implements HttpService {
                             response.setContent("");
                             writeHeadersForCaching(response, maxCache);
                             response.setResponseCode(304); // not modified
+
                             callback.apply(SuccessFail.success());
                             return;
                         }
