@@ -46,6 +46,7 @@ public class ResourceService implements HttpService {
                         if (!ResourceService_DateUtil.hasChanged(ifModifiedSince.getTime(), resource.lastModified())) {
 
                             response.setContent("");
+                            response.setMimeType("");
                             response.setResponseCode(304); // not modified
                             callback.apply(SuccessFail.success());
                             return;
