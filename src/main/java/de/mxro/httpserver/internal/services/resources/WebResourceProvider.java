@@ -8,7 +8,15 @@ public class WebResourceProvider implements ResourceProvider {
     private final ResourceProvider decorated;
 
     @Override
-    public Resource getResource(final String path) {
+    public Resource getResource(final String rawPath) {
+        final String path;
+
+        if (!rawPath.contains("?")) {
+            path = rawPath;
+        } else {
+            path = rawPath.substring(0, rawPath.lastIndexOf("?"));
+        }
+
         final Resource resource = decorated.getResource(path);
 
         if (resource == null) {
