@@ -2,6 +2,7 @@ package de.mxro.httpserver;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -56,6 +57,14 @@ public final class RequestData implements Request {
 
     public void setData(final byte[] data) {
         this.data = data;
+    }
+
+    public void setData(final String text) {
+        try {
+            this.data = text.getBytes("UTF-8");
+        } catch (final UnsupportedEncodingException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void setHeaders(final Map<String, String> headers) {
