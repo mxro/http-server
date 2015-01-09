@@ -9,6 +9,7 @@ import de.mxro.httpserver.Request;
 import de.mxro.httpserver.internal.services.DispatchService;
 import de.mxro.httpserver.internal.services.EchoService;
 import de.mxro.httpserver.internal.services.FilterService;
+import de.mxro.httpserver.internal.services.MetricsService;
 import de.mxro.httpserver.internal.services.ProxyService;
 import de.mxro.httpserver.internal.services.RequestTimeEnforcerService;
 import de.mxro.httpserver.internal.services.ResourceService;
@@ -16,6 +17,7 @@ import de.mxro.httpserver.internal.services.SafeShutdownGuard;
 import de.mxro.httpserver.internal.services.ShutdownService;
 import de.mxro.httpserver.internal.services.StaticDataService;
 import de.mxro.httpserver.resources.ResourceProvider;
+import de.mxro.metrics.MetricsNode;
 import de.mxro.server.ServerComponent;
 
 public final class Services {
@@ -31,6 +33,10 @@ public final class Services {
     public static HttpService limitTime(final long maxCallTimeInMs, final HttpService decoratedService) {
         return new RequestTimeEnforcerService(maxCallTimeInMs, decoratedService);
 
+    }
+
+    public static HttpService metrics(final MetricsNode metrics) {
+        return new MetricsService(metrics);
     }
 
     public final static HttpService filter(final Function<Request, Boolean> test, final HttpService primary,
