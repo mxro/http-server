@@ -16,6 +16,7 @@ import de.mxro.httpserver.internal.services.ResourceService;
 import de.mxro.httpserver.internal.services.SafeShutdownGuard;
 import de.mxro.httpserver.internal.services.ShutdownService;
 import de.mxro.httpserver.internal.services.StaticDataService;
+import de.mxro.httpserver.internal.services.TrackRequestTimeService;
 import de.mxro.httpserver.resources.ResourceProvider;
 import de.mxro.metrics.MetricsNode;
 import de.mxro.server.ServerComponent;
@@ -35,8 +36,20 @@ public final class Services {
 
     }
 
+    /**
+     * <p>
+     * Create a service, which renders the provided metrics node.
+     * 
+     * @param metrics
+     * @return
+     */
     public static HttpService metrics(final MetricsNode metrics) {
         return new MetricsService(metrics);
+    }
+
+    public static HttpService trackRequestTimes(final MetricsNode metrics, final String metricsId,
+            final HttpService decorated) {
+        return new TrackRequestTimeService(metricId, metrics, decorated);
     }
 
     public final static HttpService filter(final Function<Request, Boolean> test, final HttpService primary,
