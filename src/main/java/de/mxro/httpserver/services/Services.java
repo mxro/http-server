@@ -47,7 +47,7 @@ public final class Services {
         return new MetricsService(metrics);
     }
 
-    public static HttpService trackRequestTimes(final MetricsNode metrics, final String metricsId,
+    public static HttpService trackRequestTimes(final MetricsNode metrics, final String metricId,
             final HttpService decorated) {
         return new TrackRequestTimeService(metricId, metrics, decorated);
     }
