@@ -25,7 +25,6 @@ public class MetricsService implements HttpService {
 
     @Override
     public void process(final Request request, final Response response, final Closure<SuccessFail> callback) {
-        System.out.println("get ...");
         metrics.render(new ValueCallback<String>() {
 
             @Override
@@ -35,9 +34,8 @@ public class MetricsService implements HttpService {
 
             @Override
             public void onSuccess(final String value) {
-                System.out.println("got");
                 response.setContent(value);
-                response.setContent("application/json");
+                response.setMimeType("application/json");
                 response.setResponseCode(200);
 
                 callback.apply(SuccessFail.success());
