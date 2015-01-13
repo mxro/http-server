@@ -38,7 +38,7 @@ public class TrackRequestTimeService implements HttpService {
 
                 final long duration = System.currentTimeMillis() - start;
 
-                metrics.perform(Metrics.value(metricId, duration));
+                metrics.record(Metrics.value(metricId, duration));
 
                 callback.apply(o);
             }
