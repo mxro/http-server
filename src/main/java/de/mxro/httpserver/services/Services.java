@@ -3,6 +3,7 @@ package de.mxro.httpserver.services;
 import java.util.Map;
 
 import de.mxro.async.Value;
+import de.mxro.async.properties.PropertyNode;
 import de.mxro.fn.Function;
 import de.mxro.httpserver.HttpService;
 import de.mxro.httpserver.Request;
@@ -18,7 +19,6 @@ import de.mxro.httpserver.internal.services.ShutdownService;
 import de.mxro.httpserver.internal.services.StaticDataService;
 import de.mxro.httpserver.internal.services.TrackRequestTimeService;
 import de.mxro.httpserver.resources.ResourceProvider;
-import de.mxro.metrics.PropertyNode;
 import de.mxro.server.ServerComponent;
 
 public final class Services {

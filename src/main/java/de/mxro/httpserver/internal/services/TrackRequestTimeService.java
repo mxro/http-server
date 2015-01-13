@@ -1,12 +1,12 @@
 package de.mxro.httpserver.internal.services;
 
 import de.mxro.async.callbacks.SimpleCallback;
+import de.mxro.async.properties.PropertyNode;
 import de.mxro.fn.Closure;
 import de.mxro.fn.SuccessFail;
 import de.mxro.httpserver.HttpService;
 import de.mxro.httpserver.Request;
 import de.mxro.httpserver.Response;
-import de.mxro.metrics.PropertyNode;
 import de.mxro.metrics.jre.Metrics;
 
 public class TrackRequestTimeService implements HttpService {
