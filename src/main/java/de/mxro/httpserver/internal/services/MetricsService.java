@@ -7,11 +7,11 @@ import de.mxro.fn.SuccessFail;
 import de.mxro.httpserver.HttpService;
 import de.mxro.httpserver.Request;
 import de.mxro.httpserver.Response;
-import de.mxro.metrics.MetricsNode;
+import de.mxro.metrics.PropertyNode;
 
 public class MetricsService implements HttpService {
 
-    private final MetricsNode metrics;
+    private final PropertyNode metrics;
 
     @Override
     public void stop(final SimpleCallback callback) {
@@ -44,7 +44,7 @@ public class MetricsService implements HttpService {
 
     }
 
-    public MetricsService(final MetricsNode metrics) {
+    public MetricsService(final PropertyNode metrics) {
         super();
         this.metrics = metrics;
     }

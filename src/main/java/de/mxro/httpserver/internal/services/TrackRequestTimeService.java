@@ -6,13 +6,13 @@ import de.mxro.fn.SuccessFail;
 import de.mxro.httpserver.HttpService;
 import de.mxro.httpserver.Request;
 import de.mxro.httpserver.Response;
-import de.mxro.metrics.MetricsNode;
+import de.mxro.metrics.PropertyNode;
 import de.mxro.metrics.jre.Metrics;
 
 public class TrackRequestTimeService implements HttpService {
 
     private final String metricId;
-    private final MetricsNode metrics;
+    private final PropertyNode metrics;
     private final HttpService decorated;
 
     @Override
@@ -38,7 +38,7 @@ public class TrackRequestTimeService implements HttpService {
 
                 final long duration = System.currentTimeMillis() - start;
 
-                metrics.record(Metrics.value(metricId, duration));
+                metrics.perform(Metrics.value(metricId, duration));
 
                 callback.apply(o);
             }
@@ -47,7 +47,7 @@ public class TrackRequestTimeService implements HttpService {
 
     }
 
-    public TrackRequestTimeService(final String metricId, final MetricsNode metrics, final HttpService decorated) {
+    public TrackRequestTimeService(final String metricId, final PropertyNode metrics, final HttpService decorated) {
         super();
         this.metricId = metricId;
         this.metrics = metrics;

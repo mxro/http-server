@@ -18,7 +18,7 @@ import de.mxro.httpserver.internal.services.ShutdownService;
 import de.mxro.httpserver.internal.services.StaticDataService;
 import de.mxro.httpserver.internal.services.TrackRequestTimeService;
 import de.mxro.httpserver.resources.ResourceProvider;
-import de.mxro.metrics.MetricsNode;
+import de.mxro.metrics.PropertyNode;
 import de.mxro.server.ServerComponent;
 
 public final class Services {
@@ -43,11 +43,11 @@ public final class Services {
      * @param metrics
      * @return
      */
-    public static HttpService metrics(final MetricsNode metrics) {
+    public static HttpService metrics(final PropertyNode metrics) {
         return new MetricsService(metrics);
     }
 
-    public static HttpService trackRequestTimes(final MetricsNode metrics, final String metricId,
+    public static HttpService trackRequestTimes(final PropertyNode metrics, final String metricId,
             final HttpService decorated) {
         return new TrackRequestTimeService(metricId, metrics, decorated);
     }
