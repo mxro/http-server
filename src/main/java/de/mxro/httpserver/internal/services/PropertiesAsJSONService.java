@@ -9,9 +9,9 @@ import de.mxro.httpserver.HttpService;
 import de.mxro.httpserver.Request;
 import de.mxro.httpserver.Response;
 
-public class MetricsService implements HttpService {
+public class PropertiesAsJSONService implements HttpService {
 
-    private final PropertyNode metrics;
+    private final PropertyNode properties;
 
     @Override
     public void stop(final SimpleCallback callback) {
@@ -25,7 +25,7 @@ public class MetricsService implements HttpService {
 
     @Override
     public void process(final Request request, final Response response, final Closure<SuccessFail> callback) {
-        metrics.render(new ValueCallback<String>() {
+        properties.render(new ValueCallback<String>() {
 
             @Override
             public void onFailure(final Throwable t) {
@@ -44,9 +44,9 @@ public class MetricsService implements HttpService {
 
     }
 
-    public MetricsService(final PropertyNode metrics) {
+    public PropertiesAsJSONService(final PropertyNode metrics) {
         super();
-        this.metrics = metrics;
+        this.properties = metrics;
     }
 
 }

@@ -10,7 +10,7 @@ import de.mxro.httpserver.Request;
 import de.mxro.httpserver.internal.services.DispatchService;
 import de.mxro.httpserver.internal.services.EchoService;
 import de.mxro.httpserver.internal.services.FilterService;
-import de.mxro.httpserver.internal.services.MetricsService;
+import de.mxro.httpserver.internal.services.PropertiesAsJSONService;
 import de.mxro.httpserver.internal.services.ProxyService;
 import de.mxro.httpserver.internal.services.RequestTimeEnforcerService;
 import de.mxro.httpserver.internal.services.ResourceService;
@@ -43,8 +43,8 @@ public final class Services {
      * @param metrics
      * @return
      */
-    public static HttpService metrics(final PropertyNode metrics) {
-        return new MetricsService(metrics);
+    public static HttpService asJSON(final PropertyNode metrics) {
+        return new PropertiesAsJSONService(metrics);
     }
 
     public static HttpService trackRequestTimes(final PropertyNode metrics, final String metricId,
