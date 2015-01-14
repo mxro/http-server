@@ -33,7 +33,6 @@ public final class Services {
 
     public static HttpService limitTime(final long maxCallTimeInMs, final HttpService decoratedService) {
         return new RequestTimeEnforcerService(maxCallTimeInMs, decoratedService);
-
     }
 
     /**
