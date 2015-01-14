@@ -38,7 +38,7 @@ public final class Services {
 
     /**
      * <p>
-     * Create a service, which renders the provided metrics node.
+     * Create a service, which renders the provided properties.
      * 
      * @param metrics
      * @return
