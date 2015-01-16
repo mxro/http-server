@@ -10,78 +10,76 @@ import de.mxro.httpserver.Response;
 
 public final class RequestTimeEnforcementThread extends Thread {
 
-	private final long maxTime;
-	private final AtomicBoolean isShutdown;
-	private final AtomicBoolean shutdownComplete;
-	private final ConcurrentLinkedQueue<RequestTimeEntry> requests;
+    private final long maxTime;
+    private final AtomicBoolean isShutdown;
+    private final AtomicBoolean shutdownComplete;
+    private final ConcurrentLinkedQueue<RequestTimeEntry> requests;
 
-	public RequestTimeEntry logRequest(Request request, Response response,
-			final Closure<SuccessFail> callback) {
-		final long started = System.currentTimeMillis();
+    public RequestTimeEntry logRequest(final Request request, final Response response,
+            final Closure<SuccessFail> callback) {
+        final long started = System.currentTimeMillis();
 
-		RequestTimeEntry entry = new RequestTimeEntry(request, response,
-				callback, started);
+        final RequestTimeEntry entry = new RequestTimeEntry(request, response, callback, started);
 
-		requests.add(entry);
-		return entry;
-	}
+        requests.add(entry);
+        return entry;
+    }
 
-	public boolean logSuccess(RequestTimeEntry entry) {
-		boolean removed = requests.remove(entry);
-		return removed;
-	}
+    public boolean logSuccess(final RequestTimeEntry entry) {
+        final boolean removed = requests.remove(entry);
+        return removed;
+    }
 
-	public void shutdown() {
-		isShutdown.set(true);
-		
-		while (!shutdownComplete.get()) {
-			
-			try {
-				Thread.sleep(5);
-			} catch (InterruptedException e) {
-				throw new RuntimeException(e);
-			}
-			
-		}
-		
-	}
+    public void shutdown() {
+        isShutdown.set(true);
 
-	@Override
-	public void run() {
-		super.run();
+        while (!shutdownComplete.get()) {
 
-		while (!isShutdown.get()) {
-			long now = System.currentTimeMillis();
-			for (RequestTimeEntry e : requests) {
+            try {
+                Thread.sleep(5);
+            } catch (final InterruptedException e) {
+                throw new RuntimeException(e);
+            }
 
-				if (now - e.getStarted() > maxTime) {
-					requests.remove(e);
+        }
 
-					e.getResponse().setResponseCode(524);
-					e.getResponse().setMimeType("text/plain");
-					e.getResponse()
-							.setContent(
-									"The call could not be completed since it took longer than the maximum allowed time.");
-					e.getCallback().apply(SuccessFail.success());
-				}
-			}
+    }
 
-			try {
-				Thread.sleep(10);
-			} catch (InterruptedException e) {
-				throw new RuntimeException(e);
-			}
-		}
-		
-		shutdownComplete.set(true);
+    @Override
+    public void run() {
+        super.run();
 
-	}
+        while (!isShutdown.get()) {
+            final long now = System.currentTimeMillis();
+            for (final RequestTimeEntry e : requests) {
 
-	public RequestTimeEnforcementThread(long maxTime) {
-		this.maxTime = maxTime;
-		this.isShutdown = new AtomicBoolean(false);
-		this.shutdownComplete = new AtomicBoolean(false);
-		this.requests = new ConcurrentLinkedQueue<RequestTimeEntry>();
-	}
+                if (now - e.getStarted() > maxTime) {
+                    requests.remove(e);
+
+                    e.getResponse().setResponseCode(524);
+                    e.getResponse().setMimeType("text/plain");
+                    e.getResponse().setContent(
+                            "The call could not be completed since it took longer than the maximum allowed time.");
+                    e.getCallback().apply(SuccessFail.success());
+                }
+            }
+
+            try {
+                Thread.sleep(10);
+            } catch (final InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+        shutdownComplete.set(true);
+
+    }
+
+    public RequestTimeEnforcementThread(final long maxTime) {
+        this.maxTime = maxTime;
+        this.isShutdown = new AtomicBoolean(false);
+        this.shutdownComplete = new AtomicBoolean(false);
+        this.requests = new ConcurrentLinkedQueue<RequestTimeEntry>();
+    }
 
 }
