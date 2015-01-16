@@ -61,6 +61,7 @@ public class SafeShutdownGuard implements HttpService {
 
             @Override
             public void onSuccess() {
+                System.out.println("shut down " + decorated);
                 decorated.stop(callback);
             }
         });
