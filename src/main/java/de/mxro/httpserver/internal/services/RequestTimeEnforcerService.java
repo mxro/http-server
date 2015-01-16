@@ -40,13 +40,11 @@ public class RequestTimeEnforcerService implements HttpService {
     @Override
     public void stop(final SimpleCallback callback) {
 
-        System.out.println("stopping");
-
         decorated.stop(new ShutdownCallback() {
 
             @Override
             public void onSuccess() {
-                System.out.println("stopped");
+
                 thread.shutdown();
                 callback.onSuccess();
 
