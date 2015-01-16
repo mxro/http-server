@@ -39,6 +39,8 @@ public final class DispatchService implements HttpService {
     @Override
     public void stop(final SimpleCallback callback) {
 
+        // System.out.println("stop ....");
+
         final ArrayList<HttpService> services = new ArrayList<HttpService>();
 
         for (final Entry<String, HttpService> e : serviceMap.entrySet()) {
