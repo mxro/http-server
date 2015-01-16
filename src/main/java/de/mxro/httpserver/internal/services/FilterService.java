@@ -16,6 +16,7 @@ public final class FilterService implements HttpService {
 
     @Override
     public void stop(final SimpleCallback callback) {
+        System.out.println("stop " + secondary);
         primary.stop(new SimpleCallback() {
 
             @Override
