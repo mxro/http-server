@@ -50,6 +50,7 @@ public class SafeShutdownGuard implements HttpService {
     @Override
     public void stop(final SimpleCallback callback) {
 
+        System.out.println("shut down " + decorated);
         // new Exception("HERE " + decorated).printStackTrace();
         this.shutdownHelper.shutdown(callback);
         // this.operationCounter = null;
