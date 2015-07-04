@@ -5,12 +5,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import de.mxro.async.callbacks.SimpleCallback;
 import de.mxro.fn.Closure;
 import de.mxro.fn.SuccessFail;
 import de.mxro.httpserver.HttpService;
 import de.mxro.httpserver.Request;
 import de.mxro.httpserver.Response;
+import delight.async.callbacks.SimpleCallback;
 
 public final class DispatchService implements HttpService {
 

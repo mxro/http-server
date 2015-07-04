@@ -2,7 +2,6 @@ package de.mxro.httpserver.services;
 
 import java.util.Map;
 
-import de.mxro.async.Value;
 import de.mxro.async.properties.PropertyNode;
 import de.mxro.fn.Function;
 import de.mxro.httpserver.HttpService;
@@ -20,6 +19,7 @@ import de.mxro.httpserver.internal.services.StaticDataService;
 import de.mxro.httpserver.internal.services.TrackRequestTimeService;
 import de.mxro.httpserver.resources.ResourceProvider;
 import de.mxro.server.ServerComponent;
+import delight.async.Value;
 
 public final class Services {
 

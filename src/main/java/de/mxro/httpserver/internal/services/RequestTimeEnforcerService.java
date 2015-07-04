@@ -1,12 +1,12 @@
 package de.mxro.httpserver.internal.services;
 
-import de.mxro.async.callbacks.SimpleCallback;
 import de.mxro.fn.Closure;
 import de.mxro.fn.SuccessFail;
 import de.mxro.httpserver.HttpService;
 import de.mxro.httpserver.Request;
 import de.mxro.httpserver.Response;
 import de.mxro.service.callbacks.ShutdownCallback;
+import delight.async.callbacks.SimpleCallback;
 
 public class RequestTimeEnforcerService implements HttpService {
 

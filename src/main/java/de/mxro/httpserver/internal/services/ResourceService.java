@@ -2,7 +2,6 @@ package de.mxro.httpserver.internal.services;
 
 import java.util.Date;
 
-import de.mxro.async.callbacks.SimpleCallback;
 import de.mxro.concurrency.jre.ConcurrencyJre;
 import de.mxro.concurrency.wrappers.SimpleExecutor;
 import de.mxro.concurrency.wrappers.SimpleExecutor.WhenExecutorShutDown;
@@ -13,6 +12,7 @@ import de.mxro.httpserver.Request;
 import de.mxro.httpserver.Response;
 import de.mxro.httpserver.resources.Resource;
 import de.mxro.httpserver.resources.ResourceProvider;
+import delight.async.callbacks.SimpleCallback;
 
 public class ResourceService implements HttpService {
 
