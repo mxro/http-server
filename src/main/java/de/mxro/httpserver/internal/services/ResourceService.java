@@ -5,14 +5,14 @@ import java.util.Date;
 import de.mxro.concurrency.jre.ConcurrencyJre;
 import de.mxro.concurrency.wrappers.SimpleExecutor;
 import de.mxro.concurrency.wrappers.SimpleExecutor.WhenExecutorShutDown;
-import de.mxro.fn.Closure;
-import de.mxro.fn.SuccessFail;
 import de.mxro.httpserver.HttpService;
 import de.mxro.httpserver.Request;
 import de.mxro.httpserver.Response;
 import de.mxro.httpserver.resources.Resource;
 import de.mxro.httpserver.resources.ResourceProvider;
 import delight.async.callbacks.SimpleCallback;
+import delight.functional.Closure;
+import delight.functional.SuccessFail;
 
 public class ResourceService implements HttpService {
 

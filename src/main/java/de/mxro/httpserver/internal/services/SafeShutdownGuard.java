@@ -1,7 +1,5 @@
 package de.mxro.httpserver.internal.services;
 
-import de.mxro.fn.Closure;
-import de.mxro.fn.SuccessFail;
 import de.mxro.httpserver.HttpService;
 import de.mxro.httpserver.Request;
 import de.mxro.httpserver.Response;
@@ -9,6 +7,8 @@ import de.mxro.service.jre.ServicesJre;
 import de.mxro.service.utils.OperationCounter;
 import de.mxro.service.utils.ShutdownHelper;
 import delight.async.callbacks.SimpleCallback;
+import delight.functional.Closure;
+import delight.functional.SuccessFail;
 
 /**
  * <P>

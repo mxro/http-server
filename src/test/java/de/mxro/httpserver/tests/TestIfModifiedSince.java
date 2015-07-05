@@ -2,11 +2,10 @@ package de.mxro.httpserver.tests;
 
 import java.util.Date;
 
-import junit.framework.Assert;
-
 import org.junit.Test;
 
 import de.mxro.httpserver.internal.services.ResourceService_DateUtil;
+import junit.framework.Assert;
 
 public class TestIfModifiedSince {
 

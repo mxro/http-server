@@ -1,9 +1,9 @@
 package de.mxro.httpserver.internal.services;
 
-import de.mxro.fn.Closure;
-import de.mxro.fn.SuccessFail;
 import de.mxro.httpserver.Request;
 import de.mxro.httpserver.Response;
+import delight.functional.Closure;
+import delight.functional.SuccessFail;
 
 public class RequestTimeEntry {
 

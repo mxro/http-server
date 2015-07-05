@@ -4,14 +4,14 @@ import java.util.concurrent.CountDownLatch;
 
 import org.junit.Test;
 
-import de.mxro.fn.Closure;
-import de.mxro.fn.SuccessFail;
 import de.mxro.httpserver.HttpServer;
 import de.mxro.httpserver.HttpService;
 import de.mxro.httpserver.Request;
 import de.mxro.httpserver.Response;
 import de.mxro.httpserver.internal.services.RequestTimeEnforcerService;
 import delight.async.callbacks.SimpleCallback;
+import delight.functional.Closure;
+import delight.functional.SuccessFail;
 
 public class TestEnforceTimeout {
 

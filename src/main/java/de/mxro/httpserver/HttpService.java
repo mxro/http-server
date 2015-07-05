@@ -1,8 +1,8 @@
 package de.mxro.httpserver;
 
-import de.mxro.fn.Closure;
-import de.mxro.fn.SuccessFail;
 import de.mxro.service.Service;
+import delight.functional.Closure;
+import delight.functional.SuccessFail;
 
 public interface HttpService extends Service {
 

@@ -1,12 +1,11 @@
 package de.mxro.httpserver.internal.services;
 
-import de.mxro.fn.Closure;
-import de.mxro.fn.Function;
-import de.mxro.fn.SuccessFail;
 import de.mxro.httpserver.HttpService;
 import de.mxro.httpserver.Request;
 import de.mxro.httpserver.Response;
 import delight.async.callbacks.SimpleCallback;
+import delight.functional.Closure;
+import delight.functional.SuccessFail;
 
 public final class FilterService implements HttpService {
 

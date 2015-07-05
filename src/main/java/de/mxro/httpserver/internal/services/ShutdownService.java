@@ -3,8 +3,6 @@ package de.mxro.httpserver.internal.services;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import de.mxro.fn.Closure;
-import de.mxro.fn.SuccessFail;
 import de.mxro.httpserver.HttpService;
 import de.mxro.httpserver.Request;
 import de.mxro.httpserver.Response;
@@ -12,6 +10,8 @@ import de.mxro.server.ServerComponent;
 import de.mxro.service.callbacks.ShutdownCallback;
 import delight.async.Value;
 import delight.async.callbacks.SimpleCallback;
+import delight.functional.Closure;
+import delight.functional.SuccessFail;
 
 public final class ShutdownService implements HttpService {
 
