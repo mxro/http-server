@@ -1,6 +1,6 @@
 package de.mxro.httpserver;
 
-import de.mxro.factories.Configuration;
+import delight.factories.Configuration;
 
 public interface HttpServerConfiguration extends Configuration {
 
