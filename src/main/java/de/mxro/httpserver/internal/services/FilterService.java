@@ -2,6 +2,7 @@ package de.mxro.httpserver.internal.services;
 
 import delight.async.callbacks.SimpleCallback;
 import delight.functional.Closure;
+import delight.functional.Function;
 import delight.functional.SuccessFail;
 
 import de.mxro.httpserver.HttpService;
@@ -60,7 +61,8 @@ public final class FilterService implements HttpService {
 
     }
 
-    public FilterService(final Function<Request, Boolean> test, final HttpService primary, final HttpService secondary) {
+    public FilterService(final Function<Request, Boolean> test, final HttpService primary,
+            final HttpService secondary) {
         super();
         this.test = test;
         this.primary = primary;
