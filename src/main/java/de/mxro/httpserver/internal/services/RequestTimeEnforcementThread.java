@@ -1,12 +1,13 @@
 package de.mxro.httpserver.internal.services;
 
+import delight.functional.Closure;
+import delight.functional.SuccessFail;
+
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import de.mxro.httpserver.Request;
 import de.mxro.httpserver.Response;
-import delight.functional.Closure;
-import delight.functional.SuccessFail;
 
 public final class RequestTimeEnforcementThread extends Thread {
 

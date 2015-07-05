@@ -1,5 +1,9 @@
 package de.mxro.httpserver.internal.services;
 
+import delight.async.callbacks.SimpleCallback;
+import delight.functional.Closure;
+import delight.functional.SuccessFail;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -16,9 +20,6 @@ import de.mxro.concurrency.wrappers.SimpleExecutor.WhenExecutorShutDown;
 import de.mxro.httpserver.HttpService;
 import de.mxro.httpserver.Request;
 import de.mxro.httpserver.Response;
-import delight.async.callbacks.SimpleCallback;
-import delight.functional.Closure;
-import delight.functional.SuccessFail;
 
 public final class ProxyService implements HttpService {
 

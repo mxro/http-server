@@ -1,5 +1,9 @@
 package de.mxro.httpserver.internal.services;
 
+import delight.async.callbacks.SimpleCallback;
+import delight.functional.Closure;
+import delight.functional.SuccessFail;
+
 import java.util.Date;
 
 import de.mxro.concurrency.jre.ConcurrencyJre;
@@ -10,9 +14,6 @@ import de.mxro.httpserver.Request;
 import de.mxro.httpserver.Response;
 import de.mxro.httpserver.resources.Resource;
 import de.mxro.httpserver.resources.ResourceProvider;
-import delight.async.callbacks.SimpleCallback;
-import delight.functional.Closure;
-import delight.functional.SuccessFail;
 
 public class ResourceService implements HttpService {
 
