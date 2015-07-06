@@ -1,6 +1,9 @@
 package de.mxro.httpserver.internal.services;
 
 import delight.async.callbacks.SimpleCallback;
+import delight.concurrency.jre.ConcurrencyJre;
+import delight.concurrency.wrappers.SimpleExecutor;
+import delight.concurrency.wrappers.SimpleExecutor.WhenExecutorShutDown;
 import delight.functional.Closure;
 import delight.functional.SuccessFail;
 
@@ -14,9 +17,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import de.mxro.concurrency.jre.ConcurrencyJre;
-import de.mxro.concurrency.wrappers.SimpleExecutor;
-import de.mxro.concurrency.wrappers.SimpleExecutor.WhenExecutorShutDown;
 import de.mxro.httpserver.HttpService;
 import de.mxro.httpserver.Request;
 import de.mxro.httpserver.Response;
