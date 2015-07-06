@@ -1,11 +1,11 @@
 package de.mxro.httpserver.services;
 
 import delight.async.Value;
+import delight.async.properties.PropertyNode;
 import delight.functional.Function;
 
 import java.util.Map;
 
-import de.mxro.async.properties.PropertyNode;
 import de.mxro.httpserver.HttpService;
 import de.mxro.httpserver.Request;
 import de.mxro.httpserver.internal.services.DispatchService;
