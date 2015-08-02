@@ -1,3 +1,7 @@
+# !!! MOVED !!!
+
+This project has permanentely moved to [javadelight/delight-http](https://github.com/javadelight/delight-http).
+
 http-server
 ===========
 
